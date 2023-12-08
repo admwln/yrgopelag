@@ -1,18 +1,5 @@
 <?php
-
-declare(strict_types=1);
-
-// Always require autoload when using packages
-require(__DIR__ . '/vendor/autoload.php');
-
-// Tell PHP to use this fine package
-use Dotenv\Dotenv;
-
-// "Connect" to .env and load it's content into $_ENV
-$dotenv = Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
-require_once(__DIR__ . '/hotelFunctions.php');
+require_once(__DIR__ . '/autoload.php');
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +8,7 @@ require_once(__DIR__ . '/hotelFunctions.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/water.css'> -->
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/water.css'>
     <link rel="stylesheet" href="css/style.css">
     <title><?= $_ENV['HOTEL_NAME']; ?></title>
 </head>
@@ -31,17 +18,38 @@ require_once(__DIR__ . '/hotelFunctions.php');
         <h1><?= $_ENV['HOTEL_NAME']; ?></h1>
     </header>
     <main>
-        <?php
-        $januaryBasic = new Calendar();
-        echo $januaryBasic->generateCalendar();
-        $januaryLuxury = new Calendar();
-        echo $januaryLuxury->generateCalendar();
 
+        <form class="choose-comfort-form" action="get-calendar.php" method="post">
+            <label for="choose-budget">Budget</label>
+            <input type="radio" name="choose-comfort" id="choose-budget" value="1" <label for="choose-standard">Standard</label>
+            <input type="radio" name="choose-comfort" id="choose-standard" value="2">
+            <label for="choose-luxury">Luxury</label>
+            <input type="radio" name="choose-comfort" id="choose-luxury" value="3">
+            <button type="submit">Show availability</button>
+        </form>
+
+        <?php
+        if (isset($_SESSION['calendar'])) {
+            echo $_SESSION['calendar'];
+            unset($_SESSION['calendar']);
+        }
         ?>
 
+        <form class="booking-form" action="" method="post">
+            <label for="arrival">Arrival</label>
+            <input type="text" name="arrival" id="arrival" disabled>
+            <label for="departure">Departure</label>
+            <input type="text" name="departure" id="departure" disabled>
+            <button type="submit">Book</button>
+        </form>
     </main>
     <footer></footer>
     <script src="js/script.js"></script>
 </body>
 
 </html>
+
+<?php
+// $januaryBasic = new Calendar();
+// echo $januaryBasic->generateCalendar();
+?>
