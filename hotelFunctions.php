@@ -51,7 +51,7 @@ function isValidUuid(string $uuid): bool
     return true;
 }
 
-// Calendar class
+// Calendar class, for hotel bookings
 class Calendar
 {
     public $weekdays;

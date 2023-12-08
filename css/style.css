@@ -33,5 +33,7 @@ body {
   background-color: var(--white);
   width: 100%;
   max-width: 400px;
-  height: 50px;
+  height: 75px;
+  padding: 5px;
+  border-radius: 5px;
 }
