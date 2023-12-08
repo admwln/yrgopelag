@@ -48,8 +48,3 @@ require_once(__DIR__ . '/autoload.php');
 </body>
 
 </html>
-
-<?php
-// $januaryBasic = new Calendar();
-// echo $januaryBasic->generateCalendar();
-?>

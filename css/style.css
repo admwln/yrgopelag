@@ -84,6 +84,6 @@ form {
   color: var(--white);
 }
 
-.calendar-dates li.disabled {
-  color: var(--white);
+.calendar-dates li.out-of-range:not(.booked) {
+  background-color: gray;
 }
