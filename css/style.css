@@ -1,5 +1,6 @@
 :root {
   --background-blue: #222b37;
+  --dark-blue: #0e151b;
   --blue-gray: #283341;
   --black: #000;
   --gray: #f5f5f5;
@@ -30,11 +31,48 @@ main {
 }
 
 /* Choose comfort level form */
-form {
-  margin-bottom: 2rem;
+
+#choose-comfort-form label {
+  background-color: var(--dark-blue);
+  display: inline-block;
+  color: var(--white);
+  cursor: pointer;
+  padding: 1rem;
+  margin-bottom: 0;
+  border-radius: 5px 5px 0 0;
+}
+
+#choose-comfort-form label:not(.selected) {
+  background-color: var(--background-blue);
+}
+
+.room-info {
+  background-color: var(--dark-blue);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.room-info:not(.selected) {
+  display: none;
+}
+
+input[type='radio'] {
+  display: none;
+}
+
+.show-availability {
+  background-color: var(--background-blue);
 }
 
 /* Calendar */
+.calendar.hidden {
+  display: none;
+}
+
 .calendar-weekdays,
 .calendar-dates {
   list-style: none;

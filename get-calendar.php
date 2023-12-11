@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 require_once(__DIR__ . '/autoload.php');
 
+// Get calendar for chosen room type, from bookings table in hotel.db
 if (isset($_POST['choose-comfort'])) {
     // 1 = budget, 2 = standard, 3 = luxury
     $roomId = $_POST['choose-comfort'];
+    // Store room ID in session variable
+    $_SESSION['roomId'] = $roomId;
 
     // Connect to hotel.db SQLite database, and check room availability in bookings table
     $db = new SQLite3(__DIR__ . '/hotel.db');
-    $statement = $db->prepare('SELECT arrival, departure FROM bookings WHERE room_id = :roomId');
+    $statement = $db->prepare('SELECT arrival, departure, comfort_level FROM bookings WHERE room_id = :roomId');
     $statement->bindValue(':roomId', $roomId, SQLITE3_INTEGER);
     $result = $statement->execute();
 
@@ -86,4 +89,5 @@ class Calendar
     }
 }
 
+// Redirect back to index.php
 header("Location: index.php");
