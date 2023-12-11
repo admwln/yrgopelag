@@ -15,6 +15,7 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : '';
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/water.css'>
     <link rel="stylesheet" href="css/style.css">
     <title><?= $_ENV['HOTEL_NAME']; ?></title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
         const selectedRoomId = <?= $selectedRoomId; ?>;
     </script>
@@ -29,18 +30,26 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : '';
         <h2>Our Rooms</h2>
         <div class="choose-comfort">
             <form id="choose-comfort-form" action="get-calendar.php" method="post">
-                <label for="choose-budget">Budget <input type="radio" name="choose-comfort" id="choose-budget" value="1">
+                <label for="choose-budget">Budget
+                    <input class="comfort-radio" type="radio" name="choose-comfort" id="choose-budget" value="1">
                 </label>
-                <label for="choose-standard">Standard</label>
-                <input type="radio" name="choose-comfort" id="choose-standard" value="2">
-                <label for="choose-luxury">Luxury</label>
-                <input type="radio" name="choose-comfort" id="choose-luxury" value="3">
+                <label for="choose-standard">
+                    Standard
+                    <input class="comfort-radio" type="radio" name="choose-comfort" id="choose-standard" value="2">
+                </label>
+
+                <label for="choose-luxury">
+                    Luxury
+                    <input class="comfort-radio" type="radio" name="choose-comfort" id="choose-luxury" value="3">
+                </label>
+
             </form>
             <?php
             foreach ($rooms as $key => $room) { ?>
                 <div class="room-info">
                     <h3><?= $room['comfort_level']; ?></h3>
                     <p><?= $room['description']; ?></p>
+                    <p>Price per day: <span class="room-price"><?= $room['price'] . '.00'; ?></span> USD</p>
                     <button class="btn show-availability" type="submit" form="choose-comfort-form">Show availability</button>
                 </div>
             <?php
@@ -53,12 +62,23 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : '';
         }
         ?>
 
-        <h2>Your Stay</h2>
+        <h2>Your Reservation</h2>
         <form class="booking-form" action="" method="post">
+            <label for="room-type">Room</label>
+            <select name="room-type" id="room-type" disabled>
+                <?php
+                foreach ($rooms as $key => $room) { ?>
+                    <option value="<?= $room['id']; ?>" <?= ($room['id'] == $selectedRoomId) ? 'selected' : ''; ?>><?= $room['comfort_level']; ?></option>
+                <?php
+
+                } ?>
+            </select>
             <label for="arrival">Arrival</label>
             <input type="text" name="arrival" id="arrival" disabled>
             <label for="departure">Departure</label>
             <input type="text" name="departure" id="departure" disabled>
+            <label for="price">Price for <span class="number-of-days">1</span> days (USD)</label>
+            <input type="text" name="price" id="price" disabled>
             <button type="submit">Book</button>
         </form>
     </main>

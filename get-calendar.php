@@ -13,7 +13,7 @@ if (isset($_POST['choose-comfort'])) {
 
     // Connect to hotel.db SQLite database, and check room availability in bookings table
     $db = new SQLite3(__DIR__ . '/hotel.db');
-    $statement = $db->prepare('SELECT arrival, departure, comfort_level FROM bookings WHERE room_id = :roomId');
+    $statement = $db->prepare('SELECT arrival, departure FROM bookings WHERE room_id = :roomId');
     $statement->bindValue(':roomId', $roomId, SQLITE3_INTEGER);
     $result = $statement->execute();
 

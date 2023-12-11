@@ -1,3 +1,5 @@
+let dayCount = 0;
+
 // SELECTED ROOM
 // When page loads, get value of selectedRoomId (resides in index.php)
 // If selectedRoomId is null or undefined, set value to 1
@@ -34,13 +36,16 @@ labels.forEach((label) => {
     }
 
     // Add class selected to labels and .room-info divs with index targetLabelIndex
-    labels[targetLabelIndex].classList.add('selected');
     document
       .querySelectorAll('.room-info')
       [targetLabelIndex].classList.add('selected');
 
-    // When clicking any label, add class hidden to .calendar
-    document.querySelector('.calendar').classList.add('hidden');
+    labels[targetLabelIndex].classList.add('selected');
+
+    // If .calendar exists, add class "hidden" to .calendar
+    if (document.querySelector('.calendar')) {
+      document.querySelector('.calendar').classList.add('hidden');
+    }
   });
 });
 
@@ -133,6 +138,21 @@ calendarDates.forEach((date) => {
         '.calendar-dates li.selected'
       );
 
+      // Calculate dayCount
+      dayCount =
+        selectedDates[selectedDates.length - 1].getAttribute('data') -
+        selectedDates[0].getAttribute('data') +
+        1;
+
+      // Pass dayCount to .number-of-days
+      const numberOfDays = document.querySelector('.number-of-days');
+      numberOfDays.innerText = dayCount;
+      // Calculate total price
+      const totalPrice = dayCount * pricePerDay;
+      // Pass total price to #price
+      const price = document.querySelector('#price');
+      price.value = totalPrice;
+
       // Turn into date format
       let firstSelectedDate = selectedDates[0].getAttribute('data');
       firstSelectedDate.length === 1
@@ -159,3 +179,35 @@ calendarDates.forEach((date) => {
     }
   });
 });
+
+// PRICE
+// Get price of selected room for the selected number of days
+const arrival = document.querySelector('#arrival').value;
+const departure = document.querySelector('#departure').value;
+const price = document.querySelector('#price');
+const pricePerDay = parseInt(
+  document.querySelector('.room-info.selected .room-price').innerText
+);
+
+// Clicking .show-availability checks .selected radio button
+const showAvailability = document.querySelector('.show-availability');
+
+document
+  .querySelector('#choose-comfort-form')
+  .addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    // Get index of selected label
+    let selectedLabelIndex;
+    for (let i = 0; i < labels.length; i++) {
+      if (labels[i].classList.contains('selected')) {
+        selectedLabelIndex = i;
+      }
+    }
+    // Check corresponding radio button
+    const radios = document.querySelectorAll('input[name="choose-comfort"]');
+    radios[selectedLabelIndex].checked = true;
+    console.log(radios[selectedLabelIndex].checked);
+
+    this.submit();
+  });
