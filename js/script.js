@@ -149,9 +149,10 @@ calendarDates.forEach((date) => {
       numberOfDays.innerText = dayCount;
       // Calculate total price
       const totalPrice = dayCount * pricePerDay;
-      // Pass total price to #price
-      const price = document.querySelector('#price');
+      // Pass total room price to #room-price
+      const price = document.querySelector('#room-price');
       price.value = totalPrice;
+      calculateTotalPrice();
 
       // Turn into date format
       let firstSelectedDate = selectedDates[0].getAttribute('data');
@@ -184,7 +185,7 @@ calendarDates.forEach((date) => {
 // Get price of selected room for the selected number of days
 const arrival = document.querySelector('#arrival').value;
 const departure = document.querySelector('#departure').value;
-const price = document.querySelector('#price');
+const price = document.querySelector('#room-price');
 const pricePerDay = parseInt(
   document.querySelector('.room-info.selected .room-price').innerText
 );
@@ -211,3 +212,64 @@ document
 
     this.submit();
   });
+
+// FEATURES checkboxes
+const checkboxes = document.querySelectorAll('.feature input[type="checkbox"]');
+checkboxes.forEach((checkbox) => {
+  checkbox.addEventListener('change', () => {
+    // Get feature id from value of checkbox
+    const featureId = checkbox.value;
+    // Get feature name from h3 sibling of parent element
+    const featureName =
+      checkbox.parentElement.parentElement.querySelector('h3').innerText;
+    // Get price from .feature-price in sibling to parent element
+    const featurePrice = parseInt(
+      checkbox.parentElement.previousElementSibling.querySelector(
+        '.feature-price'
+      ).innerText
+    );
+    if (checkbox.checked) {
+      // If checkbox is checked, add class "selected" to parent element
+      checkbox.parentElement.parentElement.classList.add('selected');
+
+      // Create li element, add featureName as text, and append to #selected-features
+      const selectedFeatures = document.querySelector('#selected-features');
+      const li = document.createElement('li');
+      li.innerText = featureName;
+      selectedFeatures.appendChild(li);
+
+      // Pass price to #features-price
+      const featuresPriceInput = document.querySelector('#features-price');
+      let featuresPrice = featuresPriceInput.value;
+      featuresPriceInput.value =
+        parseInt(featuresPrice) + parseInt(featurePrice);
+      calculateTotalPrice();
+    } else {
+      checkbox.parentElement.parentElement.classList.remove('selected');
+      // Remove li element from #selected-features
+      const selectedFeatures = document.querySelector('#selected-features');
+      const lis = selectedFeatures.querySelectorAll('li');
+      lis.forEach((li) => {
+        if (li.innerText === featureName) {
+          li.remove();
+        }
+      });
+      // Deduct price from #features-price
+      const featuresPriceInput = document.querySelector('#features-price');
+      let featuresPrice = featuresPriceInput.value;
+      featuresPriceInput.value =
+        parseInt(featuresPrice) - parseInt(featurePrice);
+      calculateTotalPrice();
+    }
+  });
+});
+
+// Calculate total price
+function calculateTotalPrice() {
+  const totalPriceInput = document.querySelector('#total-price');
+  const roomPriceInput = document.querySelector('#room-price');
+  const featuresPriceInput = document.querySelector('#features-price');
+  const totalPrice =
+    parseInt(roomPriceInput.value) + parseInt(featuresPriceInput.value);
+  totalPriceInput.value = totalPrice;
+}

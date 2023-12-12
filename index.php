@@ -3,7 +3,7 @@ require_once(__DIR__ . '/autoload.php');
 require_once(__DIR__ . '/get-rooms.php');
 require_once(__DIR__ . '/get-features.php');
 
-$selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : '';
+$selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +49,7 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : '';
                 <div class="room-info">
                     <h3><?= $room['comfort_level']; ?></h3>
                     <p><?= $room['description']; ?></p>
-                    <p>Price per day: <span class="room-price"><?= $room['price'] . '.00'; ?></span> USD</p>
+                    <p>Room rate: <span class="room-price"><?= $room['price'] . '.00'; ?></span> USD</p>
                     <button class="btn show-availability" type="submit" form="choose-comfort-form">Show availability</button>
                 </div>
             <?php
@@ -62,8 +62,14 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : '';
         }
         ?>
 
-        <h2>Your Reservation</h2>
-        <form class="booking-form" action="" method="post">
+        <form class="booking-form" action="make-reservation" method="post">
+            <h2>Optional Extras</h2>
+            <div class="features-slider">
+                <div class="features-slides">
+                    <?= $featuresHtml; ?>
+                </div>
+            </div>
+            <h2>Your Reservation</h2>
             <label for="room-type">Room</label>
             <select name="room-type" id="room-type" disabled>
                 <?php
@@ -74,12 +80,21 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : '';
                 } ?>
             </select>
             <label for="arrival">Arrival</label>
-            <input type="text" name="arrival" id="arrival" disabled>
+            <input type="text" name="arrival" id="arrival" value="Check availability above" disabled>
             <label for="departure">Departure</label>
-            <input type="text" name="departure" id="departure" disabled>
-            <label for="price">Price for <span class="number-of-days">1</span> days (USD)</label>
-            <input type="text" name="price" id="price" disabled>
-            <button type="submit">Book</button>
+            <input type="text" name="departure" id="departure" value="Check availability above" disabled>
+            <label for="room-price">Room subtotal, <span class="number-of-days">1</span> days (USD)</label>
+            <input type="text" name="room-price" id="room-price" value="0" disabled>
+            <label for="features-price">Extras subtotal (USD)</label>
+            <ul id="selected-features">
+
+            </ul>
+            <input type="text" name="features-price" id="features-price" value="0" disabled>
+            <label for="total-price">Total price (USD)</label>
+            <input type="text" name="total-price" id="total-price" value="0" disabled>
+            <label for="transfer-code">Transfer code</label>
+            <input type="text" name="transfer-code" id="transfer-code">
+            <button type="submit" form="booking-form">Book</button>
         </form>
     </main>
     <footer></footer>
