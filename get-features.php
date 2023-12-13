@@ -3,8 +3,10 @@
 declare(strict_types=1);
 
 require_once(__DIR__ . '/autoload.php');
+require_once(__DIR__ . '/hotelFunctions.php');
 
 // Get all features from features table in hotel.db
+
 $db = new SQLite3(__DIR__ . '/hotel.db');
 $statement = $db->prepare('SELECT * FROM features');
 $result = $statement->execute();
@@ -22,6 +24,6 @@ foreach ($features as $feature) {
     $featuresHtml .= '<h3>' . $feature['feature'] . '</h3>';
     $featuresHtml .= '<p>' . $feature['description'] . '</p>';
     $featuresHtml .= '<p><span class="feature-price">' . $feature['price'] . '</span>.00 USD</p>';
-    $featuresHtml .= '<div><label for="feature-' . $feature['id'] . '">Add to reservation</label><input type="checkbox" name="feature-' . $feature['id'] . '" id="feature-' . $feature['id'] . '" value="' . $feature['id'] . '"></div>';
+    $featuresHtml .= '<div><label for="feature-' . $feature['id'] . '">Add to reservation</label><input type="checkbox" name="feature[]" id="feature-' . $feature['id'] . '" value="' . $feature['id'] . '"></div>';
     $featuresHtml .= '</div>';
 }

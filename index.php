@@ -62,7 +62,7 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
         }
         ?>
 
-        <form class="booking-form" action="make-reservation" method="post">
+        <form class="booking-form" action="make-reservation.php" method="post">
             <h2>Optional Extras</h2>
             <div class="features-slider">
                 <div class="features-slides">
@@ -70,8 +70,12 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                 </div>
             </div>
             <h2>Your Reservation</h2>
+            <label for="first-name">First name</label>
+            <input type="text" name="first-name" id="first-name" required>
+            <label for="last-name">Last name</label>
+            <input type="text" name="last-name" id="last-name" required>
             <label for="room-type">Room</label>
-            <select name="room-type" id="room-type" disabled>
+            <select name="room-type" id="room-type">
                 <?php
                 foreach ($rooms as $key => $room) { ?>
                     <option value="<?= $room['id']; ?>" <?= ($room['id'] == $selectedRoomId) ? 'selected' : ''; ?>><?= $room['comfort_level']; ?></option>
@@ -80,9 +84,9 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                 } ?>
             </select>
             <label for="arrival">Arrival</label>
-            <input type="text" name="arrival" id="arrival" value="Check availability above" disabled>
+            <input type="text" name="arrival" id="arrival" value="Check availability above">
             <label for="departure">Departure</label>
-            <input type="text" name="departure" id="departure" value="Check availability above" disabled>
+            <input type="text" name="departure" id="departure" value="Check availability above">
             <label for="room-price">Room subtotal, <span class="number-of-days">1</span> days (USD)</label>
             <input type="text" name="room-price" id="room-price" value="0" disabled>
             <label for="features-price">Extras subtotal (USD)</label>
@@ -91,10 +95,10 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
             </ul>
             <input type="text" name="features-price" id="features-price" value="0" disabled>
             <label for="total-price">Total price (USD)</label>
-            <input type="text" name="total-price" id="total-price" value="0" disabled>
+            <input type="text" name="total-price" id="total-price" value="0">
             <label for="transfer-code">Transfer code</label>
             <input type="text" name="transfer-code" id="transfer-code">
-            <button type="submit" form="booking-form">Book</button>
+            <button type="submit">Book</button>
         </form>
     </main>
     <footer></footer>

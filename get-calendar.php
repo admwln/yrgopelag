@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 require_once(__DIR__ . '/autoload.php');
+require_once(__DIR__ . '/hotelFunctions.php');
 
 // Get calendar for chosen room type, from bookings table in hotel.db
 if (isset($_POST['choose-comfort'])) {
@@ -12,14 +13,14 @@ if (isset($_POST['choose-comfort'])) {
     $_SESSION['roomId'] = $roomId;
 
     // Connect to hotel.db SQLite database, and check room availability in bookings table
-    $db = new SQLite3(__DIR__ . '/hotel.db');
+    $db = connect('hotel.db');
     $statement = $db->prepare('SELECT arrival, departure FROM bookings WHERE room_id = :roomId');
-    $statement->bindValue(':roomId', $roomId, SQLITE3_INTEGER);
+    $statement->bindValue(':roomId', $roomId, PDO::PARAM_INT);
     $result = $statement->execute();
 
     // Fetch all results from the database into an associative array
     $bookings = array();
-    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
         $bookings[] = $row;
     }
 

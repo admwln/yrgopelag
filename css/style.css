@@ -145,11 +145,6 @@ input[type='radio'] {
 
 /* Features */
 
-.feature input[type='checkbox'] {
-  display: inline-block;
-  margin: 0.2rem 0.75rem;
-}
-
 .features-slider {
   display: flex;
   align-items: center;
@@ -180,4 +175,9 @@ input[type='radio'] {
   justify-content: flex-start;
   width: 100%;
   gap: 0.5rem;
+}
+
+.feature input[type='checkbox'] {
+  display: inline-block;
+  margin: 0.2rem 0.75rem;
 }
