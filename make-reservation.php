@@ -8,7 +8,9 @@ require_once(__DIR__ . '/hotelFunctions.php');
 // Get posted data
 $roomId = $_POST['room-type'];
 $firstName = $_POST['first-name'];
+$firstName = sanVal($firstName);
 $lastName = $_POST['last-name'];
+$lastName = sanVal($lastName);
 $arrival = $_POST['arrival'];
 $departure = $_POST['departure'];
 $featureIds = array();
@@ -16,7 +18,9 @@ if (isset($_POST['feature'])) {
     $featureIds = $_POST['feature'];
 }
 $totalPrice = $_POST['total-price'];
+$totalPrice = sanVal($totalPrice);
 $transferCode = $_POST['transfer-code'];
+$transferCode = sanVal($transferCode);
 
 // Double check that the room is available
 if (!isRoomAvailable($roomId, $arrival, $departure)) {
@@ -108,6 +112,9 @@ $bookingId = $db->lastInsertId();
 
 echo 'Reservation created! Booking id: ' . $bookingId;
 
+// Array with all selected features
+$selectedFeatures = array();
+
 // If any extra features were selected, add them to the booking_feature table
 if (count($featureIds) > 0) {
     foreach ($featureIds as $featureId) {
@@ -116,6 +123,62 @@ if (count($featureIds) > 0) {
         $stmt->bindParam(':bookingId', $bookingId, PDO::PARAM_INT);
         $stmt->bindParam(':featureId', $featureId, PDO::PARAM_INT);
         $stmt->execute();
-        echo ' Feature added: ' . $featureId;
+
+        // Get the name and cost of the selected feature
+        $sql = 'SELECT * FROM features WHERE id = :featureId;';
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':featureId', $featureId, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $selectedFeature = [
+            'name' => $result['feature'],
+            'cost' => $result['price']
+        ];
+        array_push($selectedFeatures, $selectedFeature);
+
+        echo '<pre>';
     }
 }
+
+
+// Get the room name (comfort level) of the selected room
+function getComfortLevel($roomId)
+{
+    $db = connect('hotel.db');
+    $sql = 'SELECT comfort_level FROM rooms WHERE id = :roomId;';
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':roomId', $roomId, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['comfort_level'];
+}
+
+$comfortLevel = getComfortLevel($roomId);
+
+// Create a JSON object with the booking details
+$bookingDetails = array(
+    'island' => $_ENV['ISLAND_NAME'],
+    'hotel' => $_ENV['HOTEL_NAME'],
+    'comfort_level' => $comfortLevel,
+    'arrival_date' => $arrival,
+    'departure_date' => $departure,
+    'total_cost' => $totalPrice,
+    'stars' => $_ENV['STARS'],
+    'features' => $selectedFeatures,
+    'additional_info' => [
+        'greeting' => 'Thank you for choosing ' . $_ENV['HOTEL_NAME'] . '!',
+        'imageUrl' => 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Hotel_Boscolo_Exedra_Nice.jpg',
+    ]
+);
+// Turn it into a JSON string
+$bookingDetails = json_encode($bookingDetails);
+
+$_SESSION['bookingDetails'] = $bookingDetails;
+
+// Redirect user to success.php
+header('Location: success.php');
+
+
+
+// TODO: Deposit transfer code at the bank using Guzzle
+exit;

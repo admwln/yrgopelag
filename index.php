@@ -23,7 +23,9 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
 
 <body>
     <header>
-        <h1><?= $_ENV['HOTEL_NAME']; ?></h1>
+        <a href="index.php">
+            <h1><?= $_ENV['HOTEL_NAME']; ?></h1>
+        </a>
     </header>
     <main>
 
@@ -84,9 +86,9 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                 } ?>
             </select>
             <label for="arrival">Arrival</label>
-            <input type="text" name="arrival" id="arrival" value="Check availability above">
+            <input type="date" name="arrival" id="arrival" min="2024-01-01" max="2024-01-31">
             <label for="departure">Departure</label>
-            <input type="text" name="departure" id="departure" value="Check availability above">
+            <input type="date" name="departure" id="departure" min="2024-01-01" max="2024-01-31">
             <label for="room-price">Room subtotal, <span class="number-of-days">1</span> days (USD)</label>
             <input type="text" name="room-price" id="room-price" value="0" disabled>
             <label for="features-price">Extras subtotal (USD)</label>

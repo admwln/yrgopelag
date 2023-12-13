@@ -50,3 +50,12 @@ function isValidUuid(string $uuid): bool
     }
     return true;
 }
+
+function sanVal(string $myString): string
+{
+    $myString = trim($myString);
+    $myString = strip_tags($myString);
+    $myString = htmlspecialchars($myString, ENT_QUOTES);
+    $myString = trim($myString);
+    return $myString;
+}
