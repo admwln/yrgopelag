@@ -53,6 +53,7 @@ if (!isValidUuid($transferCode)) {
     echo 'not valid';
     // If the transfer code is invalid, redirect the user to index.php with a message saying that the transfer code is invalid
     // !!! BREAK
+    die();
 }
 
 if (isValidUuid($transferCode)) {
@@ -77,8 +78,8 @@ function checkTransferCodeWithBank($transferCode, $totalPrice)
             ]);
             $responseData = json_decode($response->getBody()->getContents(), true);
             if (isset($responseData['error'])) {
-                // If the response contains an error, redirect the user to index.php with a message saying that the transfer code is invalid
-                // !!! BREAK
+                // TODO: Redirect user to index.php with a message saying that the transfer code is invalid
+                // TODO: BREAK
                 echo '<pre>';
                 die(var_dump($responseData['error']));
             }
@@ -90,6 +91,8 @@ function checkTransferCodeWithBank($transferCode, $totalPrice)
         } catch (GuzzleHttp\Exception\ServerException $e) {
             $response = $e->getResponse();
             $responseBodyAsString = $response->getBody()->getContents();
+            // TODO: Redirect user to index.php with a message saying that the transfer code is invalid
+            // TODO: BREAK
             echo '<pre>';
             die(var_dump($responseBodyAsString));
         }
@@ -111,8 +114,6 @@ $stmt->execute();
 $bookingId = $db->lastInsertId();
 
 $_SESSION['bookingId'] = $bookingId;
-
-echo 'Reservation created! Booking id: ' . $bookingId;
 
 // Array with all selected features
 $selectedFeatures = array();
@@ -141,7 +142,6 @@ if (count($featureIds) > 0) {
         echo '<pre>';
     }
 }
-
 
 // // Get the room name (comfort level) of the selected room
 // function getComfortLevel($roomId)
@@ -181,8 +181,38 @@ file_put_contents('success-' . $bookingId . '.json', $bookingDetails);
 
 
 // Redirect user to success.php
-header('Location: success.php');
+//header('Location: success.php');
 // header('Location: success-' . $bookingId . '.json');
 
-// TODO: Deposit transfer code at the bank using Guzzle
+// Deposit transfer code at the bank using Guzzle
+// If the transfer code is valid, the bank will return a JSON object with the key 'balance' and the value of the balanc
+$client = new \GuzzleHttp\Client();
+try {
+    $response = $client->request('POST', 'https://www.yrgopelag.se/centralbank/deposit', [
+        'form_params' => [
+            'user' => $_ENV['USER_NAME'],
+            'api_key' => $_ENV['API_KEY'],
+            'transferCode' => $transferCode,
+        ],
+    ]);
+    $responseData = json_decode($response->getBody()->getContents(), true);
+    if (isset($responseData['message']) && str_contains($responseData['message'], 'success')) {
+        echo '<pre>';
+        echo 'post success';
+        var_dump($responseData['message']);
+    } else {
+        echo '<pre>';
+        echo 'post error';
+        var_dump($responseData);
+    }
+} catch (GuzzleHttp\Exception\ServerException $e) {
+    $response = $e->getResponse();
+    $responseBodyAsString = $response->getBody()->getContents();
+    echo '<pre>';
+    echo 'post error catched';
+    var_dump($responseBodyAsString);
+}
+
+
+
 exit;
