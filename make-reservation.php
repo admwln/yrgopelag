@@ -110,6 +110,8 @@ $stmt->bindParam(':transferCode', $transferCode, PDO::PARAM_STR);
 $stmt->execute();
 $bookingId = $db->lastInsertId();
 
+$_SESSION['bookingId'] = $bookingId;
+
 echo 'Reservation created! Booking id: ' . $bookingId;
 
 // Array with all selected features
@@ -141,25 +143,25 @@ if (count($featureIds) > 0) {
 }
 
 
-// Get the room name (comfort level) of the selected room
-function getComfortLevel($roomId)
-{
-    $db = connect('hotel.db');
-    $sql = 'SELECT comfort_level FROM rooms WHERE id = :roomId;';
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(':roomId', $roomId, PDO::PARAM_INT);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result['comfort_level'];
-}
+// // Get the room name (comfort level) of the selected room
+// function getComfortLevel($roomId)
+// {
+//     $db = connect('hotel.db');
+//     $sql = 'SELECT comfort_level FROM rooms WHERE id = :roomId;';
+//     $stmt = $db->prepare($sql);
+//     $stmt->bindParam(':roomId', $roomId, PDO::PARAM_INT);
+//     $stmt->execute();
+//     $result = $stmt->fetch(PDO::FETCH_ASSOC);
+//     return $result['comfort_level'];
+// }
 
-$comfortLevel = getComfortLevel($roomId);
+// $comfortLevel = getComfortLevel($roomId);
 
 // Create a JSON object with the booking details
 $bookingDetails = array(
     'island' => $_ENV['ISLAND_NAME'],
     'hotel' => $_ENV['HOTEL_NAME'],
-    'comfort_level' => $comfortLevel,
+    //'comfort_level' => $comfortLevel,
     'arrival_date' => $arrival,
     'departure_date' => $departure,
     'total_cost' => $totalPrice,
@@ -173,12 +175,14 @@ $bookingDetails = array(
 // Turn it into a JSON string
 $bookingDetails = json_encode($bookingDetails);
 
-$_SESSION['bookingDetails'] = $bookingDetails;
+// Save string to file success-<booking id>.json
+file_put_contents('success-' . $bookingId . '.json', $bookingDetails);
+
+
 
 // Redirect user to success.php
 header('Location: success.php');
-
-
+// header('Location: success-' . $bookingId . '.json');
 
 // TODO: Deposit transfer code at the bank using Guzzle
 exit;
