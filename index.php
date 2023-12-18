@@ -32,19 +32,9 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
         <h2>Our Rooms</h2>
         <div class="choose-comfort">
             <form id="choose-comfort-form" action="get-calendar.php" method="post">
-                <label for="choose-budget">Budget
-                    <input class="comfort-radio" type="radio" name="choose-comfort" id="choose-budget" value="1">
-                </label>
-                <label for="choose-standard">
-                    Standard
-                    <input class="comfort-radio" type="radio" name="choose-comfort" id="choose-standard" value="2">
-                </label>
-
-                <label for="choose-luxury">
-                    Luxury
-                    <input class="comfort-radio" type="radio" name="choose-comfort" id="choose-luxury" value="3">
-                </label>
-
+                <input type="submit" class="show-availability" name="choose-comfort" value="Budget"></input>
+                <input type="submit" class="show-availability" name="choose-comfort" value="Standard"></input>
+                <input type="submit" class="show-availability" name="choose-comfort" value="Luxury"></input>
             </form>
             <?php
             foreach ($rooms as $key => $room) { ?>
@@ -52,15 +42,18 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                     <h3><?= $room['comfort_level']; ?></h3>
                     <p><?= $room['description']; ?></p>
                     <p>Room rate: <span class="room-price"><?= $room['price'] . '.00'; ?></span> USD</p>
-                    <button class="btn show-availability" type="submit" form="choose-comfort-form">Show availability</button>
                 </div>
             <?php
             } ?>
         </div>
         <?php
+        // Echo the default calendar or the user-selected calendar, if it exists in the session variable
         if (isset($_SESSION['calendar'])) {
             echo $_SESSION['calendar'];
             unset($_SESSION['calendar']);
+        } else {
+            // Default to room 1 (budget)
+            require_once(__DIR__ . '/get-calendar.php');
         }
         ?>
 

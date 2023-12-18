@@ -7,47 +7,15 @@ if (selectedRoomId === null || selectedRoomId === undefined) {
   selectedRoomId = 1;
 }
 // According to selectedRoomId, set class "selected" on corresponding room, both label and .room-info div
-const selectedLabel = document.querySelector(
-  '#choose-comfort-form label:nth-of-type(' + selectedRoomId + ')'
+const selectedTag = document.querySelector(
+  'input.show-availability:nth-of-type(' + selectedRoomId + ')'
 );
-selectedLabel.classList.add('selected');
+selectedTag.classList.add('selected');
+
 const selectedRoomInfo = document.querySelector(
   '.room-info:nth-of-type(' + selectedRoomId + ')'
 );
 selectedRoomInfo.classList.add('selected');
-
-// When clicking on a label, remove class "selected" from all labels and .room-info divs, and add class "selected" to clicked label and corresponding .room-info div
-const labels = document.querySelectorAll('#choose-comfort-form label');
-labels.forEach((label) => {
-  label.addEventListener('click', () => {
-    // Get index of target label
-    let targetLabelIndex;
-    for (let i = 0; i < labels.length; i++) {
-      if (labels[i] === label) {
-        targetLabelIndex = i;
-      }
-    }
-    // Remove class selected from all labels and .room-info divs with index other than targetLabelIndex
-    for (let j = 0; j < labels.length; j++) {
-      if (j !== targetLabelIndex) {
-        labels[j].classList.remove('selected');
-        document.querySelectorAll('.room-info')[j].classList.remove('selected');
-      }
-    }
-
-    // Add class selected to labels and .room-info divs with index targetLabelIndex
-    document
-      .querySelectorAll('.room-info')
-      [targetLabelIndex].classList.add('selected');
-
-    labels[targetLabelIndex].classList.add('selected');
-
-    // If .calendar exists, add class "hidden" to .calendar
-    if (document.querySelector('.calendar')) {
-      document.querySelector('.calendar').classList.add('hidden');
-    }
-  });
-});
 
 // CALENDAR
 // When checking checkbox (".calendar-dates input"), toggle class "selected" on parent element, and remove class "available"
@@ -189,29 +157,6 @@ const price = document.querySelector('#room-price');
 const pricePerDay = parseInt(
   document.querySelector('.room-info.selected .room-price').innerText
 );
-
-// Clicking .show-availability checks .selected radio button
-const showAvailability = document.querySelector('.show-availability');
-
-document
-  .querySelector('#choose-comfort-form')
-  .addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    // Get index of selected label
-    let selectedLabelIndex;
-    for (let i = 0; i < labels.length; i++) {
-      if (labels[i].classList.contains('selected')) {
-        selectedLabelIndex = i;
-      }
-    }
-    // Check corresponding radio button
-    const radios = document.querySelectorAll('input[name="choose-comfort"]');
-    radios[selectedLabelIndex].checked = true;
-    console.log(radios[selectedLabelIndex].checked);
-
-    this.submit();
-  });
 
 // FEATURES checkboxes
 const checkboxes = document.querySelectorAll('.feature input[type="checkbox"]');

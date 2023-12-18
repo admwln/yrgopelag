@@ -10,42 +10,52 @@ if (isset($_POST['choose-comfort'])) {
     // 1 = budget, 2 = standard, 3 = luxury
     $roomId = $_POST['choose-comfort'];
     // Store room ID in session variable
+    if ($roomId === 'Budget') {
+        $roomId = 1;
+    } elseif ($roomId === 'Standard') {
+        $roomId = 2;
+    } elseif ($roomId === 'Luxury') {
+        $roomId = 3;
+    }
     $_SESSION['roomId'] = $roomId;
-
-    // Connect to hotel.db SQLite database, and check room availability in bookings table
-    $db = connect('hotel.db');
-    $statement = $db->prepare('SELECT arrival, departure FROM bookings WHERE room_id = :roomId');
-    $statement->bindValue(':roomId', $roomId, PDO::PARAM_INT);
-    $result = $statement->execute();
-
-    // Fetch all results from the database into an associative array
-    $bookings = array();
-    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-        $bookings[] = $row;
-    }
-
-    // Loop through all bookings and create an array of all booked dates, including arrival and departure and in between
-    $occupancy = array();
-    foreach ($bookings as $booking) {
-        $arrival = $booking['arrival'];
-        // Extract only the day from the arrival date
-        $arrival = (int)substr($arrival, 8, 2);
-        $departure = $booking['departure'];
-        // Extract only the day from the departure date
-        $departure = (int)substr($departure, 8, 2);
-        // Loop through all days between arrival and departure, and add them to the occupancy array
-        for ($i = $arrival; $i <= $departure; $i++) {
-            $occupancy[] = $i;
-        }
-    }
-
-    // Create a new calendar object
-    $calendar = new Calendar();
-    // Generate the HTML for the calendar
-    $calendarHtml = $calendar->generateCalendar($occupancy);
-    // Store in session variable
-    $_SESSION['calendar'] = $calendarHtml;
+} else {
+    // If no room ID is set, use 1 as default
+    $roomId = 1;
 }
+// Connect to hotel.db SQLite database, and check room availability in bookings table
+$db = connect('hotel.db');
+$statement = $db->prepare('SELECT arrival, departure FROM bookings WHERE room_id = :roomId');
+$statement->bindValue(':roomId', $roomId, PDO::PARAM_INT);
+$result = $statement->execute();
+
+// Fetch all results from the database into an associative array
+$bookings = array();
+while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+    $bookings[] = $row;
+}
+
+// Loop through all bookings and create an array of all booked dates, including arrival and departure and in between
+$occupancy = array();
+foreach ($bookings as $booking) {
+    $arrival = $booking['arrival'];
+    // Extract only the day from the arrival date
+    $arrival = (int)substr($arrival, 8, 2);
+    $departure = $booking['departure'];
+    // Extract only the day from the departure date
+    $departure = (int)substr($departure, 8, 2);
+    // Loop through all days between arrival and departure, and add them to the occupancy array
+    for ($i = $arrival; $i <= $departure; $i++) {
+        $occupancy[] = $i;
+    }
+}
+
+// Create a new calendar object
+$calendar = new Calendar();
+// Generate the HTML for the calendar
+$calendarHtml = $calendar->generateCalendar($occupancy);
+// Store in session variable
+$_SESSION['calendar'] = $calendarHtml;
+
 
 // Calendar class, for hotel bookings
 class Calendar
