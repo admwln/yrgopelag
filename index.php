@@ -82,7 +82,7 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
             <input type="text" name="arrival" id="arrival" min="2024-01-01" max="2024-01-31" readonly>
             <label for="departure">Departure</label>
             <input type="text" name="departure" id="departure" min="2024-01-01" max="2024-01-31" readonly>
-            <label for="room-price">Room subtotal, <span class="number-of-days">1</span> days (USD)</label>
+            <label for="room-price">Room subtotal (USD)</label>
             <input type="text" name="room-price" id="room-price" value="0" readonly>
             <label for="features-price">Extras subtotal (USD)</label>
             <ul id="selected-features">
