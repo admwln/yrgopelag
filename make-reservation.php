@@ -172,17 +172,15 @@ $bookingDetails = array(
         'imageUrl' => 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Hotel_Boscolo_Exedra_Nice.jpg',
     ]
 );
+
+$_SESSION['bookingDetails'] = $bookingDetails;
+
 // Turn it into a JSON string
 $bookingDetails = json_encode($bookingDetails);
 
 // Save string to file success-<booking id>.json
 file_put_contents('success-' . $bookingId . '.json', $bookingDetails);
 
-
-
-// Redirect user to success.php
-//header('Location: success.php');
-// header('Location: success-' . $bookingId . '.json');
 
 // Deposit transfer code at the bank using Guzzle
 // If the transfer code is valid, the bank will return a JSON object with the key 'balance' and the value of the balanc
@@ -191,28 +189,25 @@ try {
     $response = $client->request('POST', 'https://www.yrgopelag.se/centralbank/deposit', [
         'form_params' => [
             'user' => $_ENV['USER_NAME'],
-            'api_key' => $_ENV['API_KEY'],
             'transferCode' => $transferCode,
         ],
     ]);
     $responseData = json_decode($response->getBody()->getContents(), true);
-    if (isset($responseData['message']) && str_contains($responseData['message'], 'success')) {
+    if (isset($responseData[0]) && str_contains($responseData[0], 'wrong')) {
         echo '<pre>';
-        echo 'post success';
-        var_dump($responseData['message']);
-    } else {
-        echo '<pre>';
-        echo 'post error';
+        echo 'post error: ';
         var_dump($responseData);
+    } else {
+        // Redirect user to success.php
+        header('Location: success.php');
+        exit;
     }
 } catch (GuzzleHttp\Exception\ServerException $e) {
     $response = $e->getResponse();
     $responseBodyAsString = $response->getBody()->getContents();
     echo '<pre>';
-    echo 'post error catched';
+    echo 'post error catched: ';
     var_dump($responseBodyAsString);
 }
-
-
 
 exit;

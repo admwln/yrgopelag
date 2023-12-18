@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 require_once(__DIR__ . '/autoload.php');
 
-// Get booking details from session variable
+// Get booking details array from session variable
 $bookingDetails = $_SESSION['bookingDetails'];
 
-// Decode the JSON string into an array
-$bookingDetails = json_decode($bookingDetails, true);
 ?>
 
 <!DOCTYPE html>
@@ -17,14 +15,13 @@ $bookingDetails = json_decode($bookingDetails, true);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/water.css'>
     <link rel="stylesheet" href="css/style.css">
     <title><?= $_ENV['HOTEL_NAME']; ?> - Booking Confirmation</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 
 <body>
-
     <header>
         <a href="index.php">
             <h1><?= $_ENV['HOTEL_NAME']; ?></h1>
@@ -34,7 +31,7 @@ $bookingDetails = json_decode($bookingDetails, true);
         <h2>Booking Confirmation</h2>
         <p>Thank you for choosing <?= $_ENV['HOTEL_NAME']; ?>!</p>
         <p>Here are your booking details:</p>
-        <a href="success-<?= $_SESSION['bookingId']; ?>.json" target="_blank">Booking details in new tab</a>
+        <a href="success-<?= $_SESSION['bookingId']; ?>.json" target="_blank">Show details <i class="fa-solid fa-up-right-from-square"></i></a>
     </main>
 </body>
 

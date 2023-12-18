@@ -12,10 +12,10 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/water.css'>
     <link rel="stylesheet" href="css/style.css">
     <title><?= $_ENV['HOTEL_NAME']; ?></title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
         const selectedRoomId = <?= $selectedRoomId; ?>;
     </script>
@@ -77,7 +77,7 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
             <label for="last-name">Last name</label>
             <input type="text" name="last-name" id="last-name" required>
             <label for="room-type">Room</label>
-            <select name="room-type" id="room-type">
+            <select name="room-type" id="room-type" readonly>
                 <?php
                 foreach ($rooms as $key => $room) { ?>
                     <option value="<?= $room['id']; ?>" <?= ($room['id'] == $selectedRoomId) ? 'selected' : ''; ?>><?= $room['comfort_level']; ?></option>
@@ -86,18 +86,18 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                 } ?>
             </select>
             <label for="arrival">Arrival</label>
-            <input type="date" name="arrival" id="arrival" min="2024-01-01" max="2024-01-31">
+            <input type="text" name="arrival" id="arrival" min="2024-01-01" max="2024-01-31" readonly>
             <label for="departure">Departure</label>
-            <input type="date" name="departure" id="departure" min="2024-01-01" max="2024-01-31">
+            <input type="text" name="departure" id="departure" min="2024-01-01" max="2024-01-31" readonly>
             <label for="room-price">Room subtotal, <span class="number-of-days">1</span> days (USD)</label>
-            <input type="text" name="room-price" id="room-price" value="0" disabled>
+            <input type="text" name="room-price" id="room-price" value="0" readonly>
             <label for="features-price">Extras subtotal (USD)</label>
             <ul id="selected-features">
 
             </ul>
-            <input type="text" name="features-price" id="features-price" value="0" disabled>
+            <input type="text" name="features-price" id="features-price" value="0" readonly>
             <label for="total-price">Total price (USD)</label>
-            <input type="text" name="total-price" id="total-price" value="0">
+            <input type="text" name="total-price" id="total-price" value="0" readonly>
             <label for="transfer-code">Transfer code</label>
             <input type="text" name="transfer-code" id="transfer-code">
             <button type="submit">Book</button>
