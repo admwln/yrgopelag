@@ -68,12 +68,17 @@ main {
 }
 
 /* Calendar */
+
 .calendar {
   max-width: calc(40% - 0.5rem);
 }
 
 .calendar.hidden {
   display: none;
+}
+
+.calendar-body {
+  margin-bottom: 2rem;
 }
 
 .calendar-weekdays,
@@ -140,7 +145,7 @@ main {
 }
 
 .reservation {
-  width: calc(60% - 0.5rem);
+  width: calc(50% - 1rem);
 }
 
 .reservation-flex-container {
@@ -273,11 +278,18 @@ main {
 /* Reservation form */
 .date-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .date-container input {
   margin-right: 0.5rem;
+}
+
+.arrival-departure {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
 }

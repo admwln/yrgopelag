@@ -5,23 +5,24 @@ declare(strict_types=1);
 require_once(__DIR__ . '/autoload.php');
 require_once(__DIR__ . '/hotelFunctions.php');
 
+// If no room ID is set, 1 is default
+$roomId = 1;
+$roomName = 'Budget';
 // Get calendar for chosen room type, from bookings table in hotel.db
 if (isset($_POST['choose-comfort'])) {
     // 1 = budget, 2 = standard, 3 = luxury
-    $roomId = $_POST['choose-comfort'];
+    $roomName = $_POST['choose-comfort'];
     // Store room ID in session variable
-    if ($roomId === 'Budget') {
+    if ($roomName === 'Budget') {
         $roomId = 1;
-    } elseif ($roomId === 'Standard') {
+    } elseif ($roomName === 'Standard') {
         $roomId = 2;
-    } elseif ($roomId === 'Luxury') {
+    } elseif ($roomName === 'Luxury') {
         $roomId = 3;
     }
     $_SESSION['roomId'] = $roomId;
-} else {
-    // If no room ID is set, use 1 as default
-    $roomId = 1;
 }
+
 // Connect to hotel.db SQLite database, and check room availability in bookings table
 $db = connect('hotel.db');
 $statement = $db->prepare('SELECT arrival, departure FROM bookings WHERE room_id = :roomId');
@@ -52,10 +53,18 @@ foreach ($bookings as $booking) {
 // Create a new calendar object
 $calendar = new Calendar();
 // Generate the HTML for the calendar
-$calendarHtml = $calendar->generateCalendar($occupancy);
+$calendarHtml = $calendar->generateCalendar($occupancy, $roomName);
 // Store in session variable
 $_SESSION['calendar'] = $calendarHtml;
 
+if (!isset($_POST['choose-comfort'])) {
+    return $_SESSION['calendar'];
+}
+
+if (isset($_POST['choose-comfort'])) {
+    // Redirect back to index.php
+    header("Location: index.php");
+}
 
 // Calendar class, for hotel bookings
 class Calendar
@@ -79,9 +88,9 @@ class Calendar
             23, 24, 25, 26, 27, 28, 29, 30, 31,
         ];
     }
-    public function generateCalendar(array $occupancy): string
+    public function generateCalendar(array $occupancy, string $roomName): string
     {
-        $html = '<section id="calendar" class="calendar"><h2>January 2024</h2><div class="calendar-body"><ul class="calendar-weekdays">';
+        $html = '<div class="calendar-body"><ul class="calendar-weekdays">';
         foreach ($this->weekdays as $weekday) {
             $html .= '<li>' . $weekday . '</li>';
         }
@@ -94,11 +103,8 @@ class Calendar
                 $html .= '<li class="available" data="' . $date . '">' . $date . '<input type="checkbox" name="checkbox-' . $date . '"/></li>';
             }
         }
-        $html .= '</ul></div></section>';
+        $html .= '</ul></div>';
 
         return $html;
     }
 }
-
-// Redirect back to index.php
-header("Location: index.php");

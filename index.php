@@ -44,24 +44,42 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                     <h3><?= $room['comfort_level']; ?></h3>
                     <p><?= $room['description']; ?></p>
                     <p>Room rate: <span class="room-price"><?= $room['price'] . '.00'; ?></span> USD</p>
+                    <a href="#calendar">
+                        <button type="button">
+                            Continue <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                    </a>
                 </div>
             <?php
             } ?>
         </div>
         <form class="booking-form" id="booking-form" action="make-reservation.php" method="post">
-            <?php
-            // Echo the default calendar or the user-selected calendar, if it exists in the session variable
-            if (isset($_SESSION['calendar'])) {
-                echo $_SESSION['calendar'];
-                unset($_SESSION['calendar']);
-            } else {
-                // Default to room 1 (budget)
-                require_once(__DIR__ . '/get-calendar.php');
-            }
-            ?>
+            <section id="calendar" class="calendar">
+                <h2>January 2024</h2>
+                <div class="arrival-departure">
+                    <div class="date-container">
+                        <label for="arrival">Arrival</label>
+                        <input type="text" name="arrival" id="arrival" min="2024-01-01" max="2024-01-31" readonly>
+                    </div>
+                    <div class="date-container">
+                        <label for="departure">Departure</label>
+                        <input type="text" name="departure" id="departure" min="2024-01-01" max="2024-01-31" readonly>
+                    </div>
+                </div>
 
+                <?php
+                // Echo the default calendar or the user-selected calendar, if it exists in the session variable
+                if (isset($_SESSION['calendar'])) {
+                    echo $_SESSION['calendar'];
+                    unset($_SESSION['calendar']);
+                } else {
+                    // Default to room 1 (budget)
+                    echo require_once(__DIR__ . '/get-calendar.php');
+                }
+                ?>
+            </section>
             <section class="reservation">
-                <h2>Your Reservation</h2>
+                <h2>Please enter your details</h2>
                 <div class="reservation-flex-container">
                     <div>
                         <label for="first-name">First name</label>
@@ -78,44 +96,37 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
 
                             } ?>
                         </select>
-                    </div>
-                    <div>
-                        <label for="arrival">Arrival</label>
-                        <div class="date-container">
-                            <input type="text" name="arrival" id="arrival" min="2024-01-01" max="2024-01-31" readonly>
-                            <a href="#calendar"><i class="fa-regular fa-calendar-days"></i></a>
-                        </div>
-                        <label for="departure">Departure</label>
-                        <div class="date-container">
-                            <input type="text" name="departure" id="departure" min="2024-01-01" max="2024-01-31" readonly>
-                            <a href="#calendar"><i class="fa-regular fa-calendar-days"></i></a>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="room-price">Room subtotal (USD)</label>
-                        <input type="text" name="room-price" id="room-price" value="0" readonly>
-                        <label for="features-price">Extras subtotal (USD)</label>
-                        <ul id="selected-features">
-
-                        </ul>
-                        <input type="text" name="features-price" id="features-price" value="0" readonly>
-                        <label for="total-price">Total price (USD)</label>
-                        <input type="text" name="total-price" id="total-price" value="0" readonly>
-                        <label for="transfer-code">Transfer code</label>
-                        <input type="text" name="transfer-code" id="transfer-code" required>
-                        <button type="submit" form="booking-form">Book</button>
+                        <a href="#features-container">
+                            <button type="button">Continue <i class="fa-solid fa-chevron-down"></i></button>
+                        </a>
                     </div>
                 </div>
             </section>
-            <div class="features-container">
-                <h2>Optional Extras</h2>
+            <div class="features-container" id="features-container">
                 <div class="feature-slider">
                     <div class="features">
                         <?= $featuresHtml; ?>
                     </div>
                 </div>
                 <div class="fade-overlay"></div>
+
             </div>
+
+            <div id="total-reserve">
+                <label for="room-price">Room subtotal (USD)</label>
+                <input type="text" name="room-price" id="room-price" value="0" readonly>
+                <label for="features-price">Extras subtotal (USD)</label>
+                <ul id="selected-features">
+
+                </ul>
+                <input type="text" name="features-price" id="features-price" value="0" readonly>
+                <label for="total-price">Total price (USD)</label>
+                <input type="text" name="total-price" id="total-price" value="0" readonly>
+                <label for="transfer-code">Transfer code</label>
+                <input type="text" name="transfer-code" id="transfer-code" required>
+                <button type="submit" form="booking-form">Reserve</button>
+            </div>
+
         </form>
     </main>
     <footer></footer>
