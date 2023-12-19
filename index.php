@@ -37,8 +37,10 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                 <input type="submit" class="show-availability" name="choose-comfort" value="Luxury"></input>
             </form>
             <?php
-            foreach ($rooms as $key => $room) { ?>
+            foreach ($rooms as $key => $room) {
+                $imgUrl = 'images/' . $room['comfort_level'] . '.png'; ?>
                 <div class="room-info">
+                    <img class="room-img" src="<?= $imgUrl; ?>" alt="<?= $room['comfort_level']; ?>">
                     <h3><?= $room['comfort_level']; ?></h3>
                     <p><?= $room['description']; ?></p>
                     <p>Room rate: <span class="room-price"><?= $room['price'] . '.00'; ?></span> USD</p>

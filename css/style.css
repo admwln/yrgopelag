@@ -54,16 +54,21 @@ main {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 1rem;
-  padding: 1rem;
+  padding: 3rem;
 }
 
 .room-info:not(.selected) {
   display: none;
 }
 
+.room-img {
+  width: 100%;
+  padding: 1rem 1rem 0 1rem;
+}
+
 /* Calendar */
 .calendar {
-  max-width: 60vw;
+  max-width: 30vw;
 }
 
 .calendar.hidden {
@@ -84,8 +89,7 @@ main {
 }
 .calendar-dates li {
   background-color: var(--white);
-  max-width: 100px;
-  height: 50px;
+  min-height: 3vw;
   padding: 5px;
   border-radius: 5px;
   color: var(--background-blue);
@@ -101,6 +105,8 @@ main {
   opacity: 0;
   cursor: pointer;
   z-index: 5;
+  padding: 0;
+  margin: 0;
 }
 
 .calendar-dates li.booked {
@@ -114,7 +120,7 @@ main {
 }
 
 .calendar-dates li.selected {
-  background-color: var(--red);
+  background-color: hotpink;
   color: var(--white);
 }
 
@@ -135,7 +141,7 @@ main {
   position: relative;
 }
 
-.features div:last-of-type {
+.features .cta-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
