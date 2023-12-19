@@ -59,8 +59,13 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
 
         <form class="booking-form" action="make-reservation.php" method="post">
             <h2>Optional Extras</h2>
-            <div class="features">
-                <?= $featuresHtml; ?>
+            <div class="features-container">
+                <div class="feature-slider">
+                    <div class="features">
+                        <?= $featuresHtml; ?>
+                    </div>
+                </div>
+                <div class="fade-overlay"></div>
             </div>
             <h2>Your Reservation</h2>
             <label for="first-name">First name</label>

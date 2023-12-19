@@ -188,11 +188,11 @@ const pricePerDay = parseInt(
 const checkboxes = document.querySelectorAll('.feature input[type="checkbox"]');
 checkboxes.forEach((checkbox) => {
   checkbox.addEventListener('change', () => {
-    // Get feature id from value of checkbox
-    const featureId = checkbox.value;
     // Get feature name from h3 sibling of parent element
     const featureName =
-      checkbox.parentElement.parentElement.querySelector('h3').innerText;
+      checkbox.parentElement.parentElement.parentElement.querySelector(
+        'h3'
+      ).innerText;
     // Get price from .feature-price in sibling to parent element
     const featurePrice = parseInt(
       checkbox.parentElement.previousElementSibling.querySelector(
