@@ -128,39 +128,19 @@ main {
 
 /* Features */
 
-.features-slider {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.features-slides {
-  margin-right: 35vw;
-  max-height: 300px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 3rem;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-  overscroll-behavior-x: contain;
-}
-.features-slides::-webkit-scrollbar {
-  display: none;
-}
-
-.feature {
-  scroll-snap-align: start;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  width: 100%;
-  gap: 0.5rem;
-}
-
 .feature input[type='checkbox'] {
   display: inline-block;
   margin: 0.2rem 0.75rem;
+}
+
+/* Reservation form */
+.date-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.date-container input {
+  margin-right: 0.5rem;
 }

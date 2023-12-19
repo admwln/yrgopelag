@@ -81,7 +81,7 @@ class Calendar
     }
     public function generateCalendar(array $occupancy): string
     {
-        $html = '<section class="calendar"><h2>January 2024</h2><div class="calendar-body"><ul class="calendar-weekdays">';
+        $html = '<section id="calendar" class="calendar"><h2>January 2024</h2><div class="calendar-body"><ul class="calendar-weekdays">';
         foreach ($this->weekdays as $weekday) {
             $html .= '<li>' . $weekday . '</li>';
         }

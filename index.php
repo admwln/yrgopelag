@@ -59,10 +59,8 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
 
         <form class="booking-form" action="make-reservation.php" method="post">
             <h2>Optional Extras</h2>
-            <div class="features-slider">
-                <div class="features-slides">
-                    <?= $featuresHtml; ?>
-                </div>
+            <div class="features">
+                <?= $featuresHtml; ?>
             </div>
             <h2>Your Reservation</h2>
             <label for="first-name">First name</label>
@@ -79,9 +77,15 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                 } ?>
             </select>
             <label for="arrival">Arrival</label>
-            <input type="text" name="arrival" id="arrival" min="2024-01-01" max="2024-01-31" readonly>
+            <div class="date-container">
+                <input type="text" name="arrival" id="arrival" min="2024-01-01" max="2024-01-31" placeholder="Use calendar above" readonly>
+                <a href="#calendar"><i class="fa-regular fa-calendar-days"></i></a>
+            </div>
             <label for="departure">Departure</label>
-            <input type="text" name="departure" id="departure" min="2024-01-01" max="2024-01-31" readonly>
+            <div class="date-container">
+                <input type="text" name="departure" id="departure" min="2024-01-01" max="2024-01-31" placeholder="Use calendar above" readonly>
+                <a href="#calendar"><i class="fa-regular fa-calendar-days"></i></a>
+            </div>
             <label for="room-price">Room subtotal (USD)</label>
             <input type="text" name="room-price" id="room-price" value="0" readonly>
             <label for="features-price">Extras subtotal (USD)</label>
@@ -92,7 +96,7 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
             <label for="total-price">Total price (USD)</label>
             <input type="text" name="total-price" id="total-price" value="0" readonly>
             <label for="transfer-code">Transfer code</label>
-            <input type="text" name="transfer-code" id="transfer-code">
+            <input type="text" name="transfer-code" id="transfer-code" required>
             <button type="submit">Book</button>
         </form>
     </main>
