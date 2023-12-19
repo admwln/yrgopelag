@@ -188,11 +188,6 @@ const pricePerDay = parseInt(
 const checkboxes = document.querySelectorAll('.feature input[type="checkbox"]');
 checkboxes.forEach((checkbox) => {
   checkbox.addEventListener('change', () => {
-    // Get feature name from h3 sibling of parent element
-    const featureName =
-      checkbox.parentElement.parentElement.parentElement.querySelector(
-        'h3'
-      ).innerText;
     // Get price from .feature-price in sibling to parent element
     const featurePrice = parseInt(
       checkbox.parentElement.previousElementSibling.querySelector(
@@ -200,14 +195,10 @@ checkboxes.forEach((checkbox) => {
       ).innerText
     );
     if (checkbox.checked) {
-      // If checkbox is checked, add class "selected" to parent element
-      checkbox.parentElement.parentElement.classList.add(SELECTED_CLASS);
-
-      // Create li element, add featureName as text, and append to #selected-features
-      const selectedFeatures = document.querySelector('#selected-features');
-      const li = document.createElement('li');
-      li.innerText = featureName;
-      selectedFeatures.appendChild(li);
+      // If checkbox is checked, add class "selected" to parent .feature
+      checkbox.parentElement.parentElement.parentElement.classList.add(
+        SELECTED_CLASS
+      );
 
       // Pass price to #features-price
       const featuresPriceInput = document.querySelector('#features-price');
@@ -216,15 +207,9 @@ checkboxes.forEach((checkbox) => {
         parseInt(featuresPrice) + parseInt(featurePrice);
       calculateTotalPrice();
     } else {
-      checkbox.parentElement.parentElement.classList.remove('selected');
-      // Remove li element from #selected-features
-      const selectedFeatures = document.querySelector('#selected-features');
-      const lis = selectedFeatures.querySelectorAll('li');
-      lis.forEach((li) => {
-        if (li.innerText === featureName) {
-          li.remove();
-        }
-      });
+      checkbox.parentElement.parentElement.parentElement.classList.remove(
+        SELECTED_CLASS
+      );
       // Deduct price from #features-price
       const featuresPriceInput = document.querySelector('#features-price');
       let featuresPrice = featuresPriceInput.value;

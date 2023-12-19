@@ -2,6 +2,7 @@
   --background-blue: #222b37;
   --dark-blue: #0e151b;
   --blue-gray: #283341;
+  --blue-lightgray: #3a4a5e;
   --black: #000;
   --gray: #f5f5f5;
   --white: #fff;
@@ -68,7 +69,7 @@ main {
 
 /* Calendar */
 .calendar {
-  max-width: 30vw;
+  max-width: calc(40% - 0.5rem);
 }
 
 .calendar.hidden {
@@ -89,6 +90,7 @@ main {
 }
 .calendar-dates li {
   background-color: var(--white);
+  min-width: 3vw;
   min-height: 3vw;
   padding: 5px;
   border-radius: 5px;
@@ -128,11 +130,30 @@ main {
   background-color: gray;
 }
 
+/* Booking form  */
 .booking-form {
-  width: 60vw;
+  width: 75vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 4vw;
+}
+
+.reservation {
+  width: calc(60% - 0.5rem);
+}
+
+.reservation-flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 /* Features */
+.features-container {
+  width: 100%;
+}
+
 .features {
   height: 400px;
   display: flex;
@@ -181,13 +202,17 @@ main {
   border-radius: 5px;
 }
 
+.feature.selected {
+  background-color: var(--blue-lightgray);
+}
+
 .features-container {
   position: relative;
 }
 
 .fade-overlay {
   position: absolute;
-  top: 0;
+  bottom: -35px;
   right: 0;
   z-index: 5;
   width: 10vw;
