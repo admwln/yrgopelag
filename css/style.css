@@ -16,7 +16,15 @@
   padding: 0;
 }
 
+a,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+}
+
 body {
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -27,11 +35,37 @@ body {
 main {
   width: 100vw;
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0 64px;
+}
+
+main.success {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 64px;
+}
+
+#choose-comfort-form {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+#booking-form {
+  width: 100%;
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
+  align-items: flex-start;
   gap: 2rem;
-  padding: 0 64px;
 }
 
 /* Rooms */
@@ -77,6 +111,7 @@ main {
 
 .calendar {
   width: calc(50% - 1rem);
+  padding: 1rem 4vw;
 }
 
 .calendar-weekdays,
@@ -94,7 +129,7 @@ main {
 .calendar-dates li {
   background-color: var(--white);
   width: 100%;
-  min-height: 4vw;
+  min-height: 3vw;
   padding: 5px;
   border-radius: 5px;
   color: var(--background-blue);
@@ -125,7 +160,7 @@ main {
 }
 
 .calendar-dates li.selected {
-  background-color: hotpink;
+  background-color: rgb(128, 26, 77);
   color: var(--white);
 }
 
@@ -143,6 +178,9 @@ main {
 }
 
 .reservation {
+  background-color: var(--dark-blue);
+  margin-top: 70px;
+  padding: 1rem 4vw;
   width: calc(50% - 1rem);
 }
 
@@ -152,13 +190,24 @@ main {
   justify-content: space-between;
 }
 
+#reserve-btn {
+  margin-top: 1rem;
+  background-color: rgb(128, 26, 77);
+}
+
+.personal input[type='text'] {
+  background-color: white;
+  color: #000;
+}
+
 /* Features */
 .features-container {
-  width: 100%;
+  width: calc(50% - 1rem);
 }
 
 .features {
-  height: 400px;
+  width: 100%;
+  /* min-height: 500px; */
   display: flex;
   align-items: flex-start;
   gap: 1rem;
@@ -174,8 +223,8 @@ main {
 }
 
 .feature-slider {
-  height: 100%;
-  position: relative;
+  height: fit-content;
+  /* position: relative; */
   display: flex;
   align-items: center;
   gap: 3rem;
@@ -191,8 +240,8 @@ main {
 }
 
 .feature {
-  height: 100%;
-  width: 250px;
+  min-height: 450px;
+  width: calc(33.33% - 0.67rem);
   scroll-snap-align: start;
   flex-shrink: 0;
   display: flex;
@@ -209,31 +258,8 @@ main {
   background-color: var(--blue-lightgray);
 }
 
-.features-container {
-  position: relative;
-}
-
-.feature:last-of-type {
-  margin-right: 10vw;
-}
-.fade-overlay {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  z-index: 5;
-  width: 10vw;
-  height: 100%;
-  background-color: transparent;
-  background-image: linear-gradient(
-    to right,
-    transparent,
-    var(--background-blue)
-  );
-  border-radius: 0 5px 5px 0;
-}
-
 .feature h3 {
-  height: 3rem;
+  height: 4rem;
   font-size: 16px;
   margin: 0 0 0.5rem 0;
   padding: 0;
@@ -277,14 +303,20 @@ main {
 }
 
 /* Reservation form */
+
 .date-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  width: calc(35% - 0.67rem);
+}
+.date-container:nth-of-type(1) {
+  width: calc(30% - 0.67rem);
 }
 
-.date-container input {
+.date-container input,
+.date-container select {
   width: 100%;
 }
 
@@ -294,4 +326,21 @@ main {
   justify-content: space-between;
   align-items: flex-start;
   gap: 1rem;
+}
+
+.reservation-flex-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.reservation-flex-item {
+  width: calc(50% - 0.5rem);
+}
+
+.reservation-flex-item > * {
+  width: unset;
 }

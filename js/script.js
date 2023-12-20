@@ -29,31 +29,6 @@ function onLoad() {
 
 onLoad();
 
-// // Show availability buttons post to get-calendar.php
-// const showAvailabilityButtons = document.querySelectorAll('.show-availability');
-// showAvailabilityButtons.forEach((button) => {
-//   button.addEventListener('click', (event) => {
-//     // Prevent default behaviour
-//     event.preventDefault();
-
-//     // Get value of button
-//     const selectedRoomId = button.getAttribute('value');
-//     console.log(selectedRoomId);
-
-//     // Post to get-calendar.php as 'choose-comfort' with value of selectedRoomId
-//     const xhr = new XMLHttpRequest();
-//     xhr.open('POST', 'get-calendar.php', true);
-//     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-//     xhr.onload = function () {
-//       if (this.status === 200) {
-//         // If response is success, reload page
-//         location.reload();
-//       }
-//     };
-//     xhr.send('choose-comfort=' + selectedRoomId);
-//   });
-// });
-
 // CALENDAR
 // When checking checkbox (".calendar-dates input"), toggle class "selected" on parent element, and remove class "available"
 const selectableCalendarDates = document.querySelectorAll(
