@@ -32,11 +32,9 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
             <h2>Our Rooms</h2>
             <div class="choose-comfort">
                 <form id="choose-comfort-form" action="get-calendar.php" method="post">
-                    <!-- <div id="choose-comfort-form"> -->
                     <input type="submit" class="show-availability" name="choose-comfort" value="Budget"></input>
                     <input type="submit" class="show-availability" name="choose-comfort" value="Standard"></input>
                     <input type="submit" class="show-availability" name="choose-comfort" value="Luxury"></input>
-                    <!-- </div> -->
                 </form>
                 <?php
                 foreach ($rooms as $key => $room) {

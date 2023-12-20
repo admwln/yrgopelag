@@ -14,9 +14,10 @@ function onLoad() {
     console.log('selectedRoomId is null or undefined, will give it value 1');
     selectedRoomId = 1;
   }
+  console.log('selectedRoomId is ' + selectedRoomId);
   // According to selectedRoomId, set class "selected" on corresponding room, both input[submit] and .room-info div
   const selectedTag = document.querySelector(
-    '.show-availability:nth-of-type(' + selectedRoomId + ')'
+    '#choose-comfort-form input:nth-of-type(' + selectedRoomId + ')'
   );
   selectedTag.classList.add(SELECTED_CLASS);
 
