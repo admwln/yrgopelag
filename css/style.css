@@ -19,19 +19,25 @@
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background-color: var(--background-blue);
 }
 
 main {
+  width: 100vw;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: flex-start;
   gap: 2rem;
+  padding: 0 64px;
 }
 
-/* Choose comfort level form */
+/* Rooms */
+.rooms {
+  width: calc(50% - 1rem);
+}
 
 #choose-comfort-form input.show-availability {
   background-color: var(--dark-blue);
@@ -70,15 +76,7 @@ main {
 /* Calendar */
 
 .calendar {
-  max-width: calc(40% - 0.5rem);
-}
-
-.calendar.hidden {
-  display: none;
-}
-
-.calendar-body {
-  margin-bottom: 2rem;
+  width: calc(50% - 1rem);
 }
 
 .calendar-weekdays,
@@ -95,8 +93,8 @@ main {
 }
 .calendar-dates li {
   background-color: var(--white);
-  min-width: 3vw;
-  min-height: 3vw;
+  width: 100%;
+  min-height: 4vw;
   padding: 5px;
   border-radius: 5px;
   color: var(--background-blue);
@@ -137,7 +135,7 @@ main {
 
 /* Booking form  */
 .booking-form {
-  width: 75vw;
+  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -194,13 +192,13 @@ main {
 
 .feature {
   height: 100%;
+  width: 250px;
   scroll-snap-align: start;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   justify-content: space-between;
-  width: 12vw;
   font-size: 14px;
   background-color: var(--blue-gray);
   padding: 1rem;
@@ -215,9 +213,12 @@ main {
   position: relative;
 }
 
+.feature:last-of-type {
+  margin-right: 10vw;
+}
 .fade-overlay {
   position: absolute;
-  bottom: -35px;
+  bottom: 0;
   right: 0;
   z-index: 5;
   width: 10vw;
@@ -284,7 +285,7 @@ main {
 }
 
 .date-container input {
-  margin-right: 0.5rem;
+  width: 100%;
 }
 
 .arrival-departure {
@@ -292,4 +293,5 @@ main {
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
+  gap: 1rem;
 }

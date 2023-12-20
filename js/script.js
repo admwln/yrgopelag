@@ -4,17 +4,19 @@ const OUT_OF_RANGE_CLASS = 'out-of-range';
 const BOOKED_CLASS = 'booked';
 
 let dayCount = 0;
+selectedRoomId = parseInt(selectedRoomId);
 
 function onLoad() {
   // SELECTED ROOM
   // When page loads, get value of selectedRoomId (resides in index.php)
   // If selectedRoomId is null or undefined, set value to 1
-  if (selectedRoomId === null || selectedRoomId === undefined) {
+  if (selectedRoomId !== 1 && selectedRoomId !== 2 && selectedRoomId !== 3) {
+    console.log('selectedRoomId is null or undefined, will give it value 1');
     selectedRoomId = 1;
   }
-  // According to selectedRoomId, set class "selected" on corresponding room, both label and .room-info div
+  // According to selectedRoomId, set class "selected" on corresponding room, both input[submit] and .room-info div
   const selectedTag = document.querySelector(
-    'input.show-availability:nth-of-type(' + selectedRoomId + ')'
+    '.show-availability:nth-of-type(' + selectedRoomId + ')'
   );
   selectedTag.classList.add(SELECTED_CLASS);
 
@@ -23,7 +25,33 @@ function onLoad() {
   );
   selectedRoomInfo.classList.add(SELECTED_CLASS);
 }
+
 onLoad();
+
+// // Show availability buttons post to get-calendar.php
+// const showAvailabilityButtons = document.querySelectorAll('.show-availability');
+// showAvailabilityButtons.forEach((button) => {
+//   button.addEventListener('click', (event) => {
+//     // Prevent default behaviour
+//     event.preventDefault();
+
+//     // Get value of button
+//     const selectedRoomId = button.getAttribute('value');
+//     console.log(selectedRoomId);
+
+//     // Post to get-calendar.php as 'choose-comfort' with value of selectedRoomId
+//     const xhr = new XMLHttpRequest();
+//     xhr.open('POST', 'get-calendar.php', true);
+//     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+//     xhr.onload = function () {
+//       if (this.status === 200) {
+//         // If response is success, reload page
+//         location.reload();
+//       }
+//     };
+//     xhr.send('choose-comfort=' + selectedRoomId);
+//   });
+// });
 
 // CALENDAR
 // When checking checkbox (".calendar-dates input"), toggle class "selected" on parent element, and remove class "available"
