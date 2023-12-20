@@ -20,8 +20,8 @@ if (isset($_POST['choose-comfort'])) {
     } elseif ($roomName === 'Luxury') {
         $roomId = 3;
     }
-    $_SESSION['roomId'] = $roomId;
 }
+$_SESSION['roomId'] = $roomId;
 
 // Connect to hotel.db SQLite database, and check room availability in bookings table
 $db = connect('hotel.db');

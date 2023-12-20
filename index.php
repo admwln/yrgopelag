@@ -17,7 +17,7 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
     <link rel="stylesheet" href="css/style.css">
     <title><?= $_ENV['HOTEL_NAME']; ?></title>
     <script>
-        const selectedRoomId = <?= $selectedRoomId; ?>;
+        let selectedRoomId = <?= $selectedRoomId; ?>;
     </script>
 </head>
 
@@ -28,42 +28,51 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
         </a>
     </header>
     <main>
-
-        <h2>Our Rooms</h2>
+        <!-- <h2>Our Rooms</h2> -->
         <div class="choose-comfort">
             <form id="choose-comfort-form" action="get-calendar.php" method="post">
                 <input type="submit" class="show-availability" name="choose-comfort" value="Budget"></input>
                 <input type="submit" class="show-availability" name="choose-comfort" value="Standard"></input>
                 <input type="submit" class="show-availability" name="choose-comfort" value="Luxury"></input>
             </form>
-            <?php
-            foreach ($rooms as $key => $room) {
-                $imgUrl = 'images/' . $room['comfort_level'] . '.png'; ?>
-                <div class="room-info">
-                    <img class="room-img" src="<?= $imgUrl; ?>" alt="<?= $room['comfort_level']; ?>">
-                    <h3><?= $room['comfort_level']; ?></h3>
-                    <p><?= $room['description']; ?></p>
-                    <p>Room rate: <span class="room-price"><?= $room['price'] . '.00'; ?></span> USD</p>
-                    <a href="#calendar">
-                        <button type="button">
-                            Continue <i class="fa-solid fa-chevron-down"></i>
-                        </button>
-                    </a>
-                </div>
-            <?php
-            } ?>
         </div>
         <form class="booking-form" id="booking-form" action="make-reservation.php" method="post">
+            <section class="rooms">
+                <?php
+                foreach ($rooms as $key => $room) {
+                    $imgUrl = 'images/' . $room['comfort_level'] . '.png'; ?>
+                    <div class="room-info">
+                        <img class="room-img" src="<?= $imgUrl; ?>" alt="<?= $room['comfort_level']; ?>">
+                        <h3><?= $room['comfort_level']; ?></h3>
+                        <p><?= $room['description']; ?></p>
+                        <p>Room rate: <span class="room-price"><?= $room['price'] . '.00'; ?></span> USD</p>
+                    </div>
+                <?php
+                } ?>
+            </section>
             <section id="calendar" class="calendar">
                 <h2>January 2024</h2>
+
                 <div class="arrival-departure">
                     <div class="date-container">
+                        <label for="room-type">Room</label>
+                        <select name="room-type" id="room-type">
+                            <?php
+                            foreach ($rooms as $key => $room) { ?>
+                                <!-- TODO: disable dropdown -->
+                                <option value="<?= $room['id']; ?>" <?= ($room['id'] == $selectedRoomId) ? 'selected' : ''; ?>><?= $room['comfort_level']; ?></option>
+                            <?php
+
+                            } ?>
+                        </select>
+                    </div>
+                    <div class="date-container">
                         <label for="arrival">Arrival</label>
-                        <input type="text" name="arrival" id="arrival" min="2024-01-01" max="2024-01-31" readonly>
+                        <input type="text" name="arrival" id="arrival" min="2024-01-01" max="2024-01-31" readonly required>
                     </div>
                     <div class="date-container">
                         <label for="departure">Departure</label>
-                        <input type="text" name="departure" id="departure" min="2024-01-01" max="2024-01-31" readonly>
+                        <input type="text" name="departure" id="departure" min="2024-01-01" max="2024-01-31" readonly required>
                     </div>
                 </div>
 
@@ -77,55 +86,46 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                     echo require_once(__DIR__ . '/get-calendar.php');
                 }
                 ?>
+                <!-- <a href="#features-container">
+                    <button type="button" class="continue">
+                        Continue <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                </a> -->
             </section>
-            <section class="reservation">
-                <h2>Please enter your details</h2>
-                <div class="reservation-flex-container">
-                    <div>
-                        <label for="first-name">First name</label>
-                        <input type="text" name="first-name" id="first-name" required>
-                        <label for="last-name">Last name</label>
-                        <input type="text" name="last-name" id="last-name" required>
-                        <label for="room-type">Room</label>
-                        <select name="room-type" id="room-type">
-                            <?php
-                            foreach ($rooms as $key => $room) { ?>
-                                <!-- TODO: disable dropdown -->
-                                <option value="<?= $room['id']; ?>" <?= ($room['id'] == $selectedRoomId) ? 'selected' : ''; ?>><?= $room['comfort_level']; ?></option>
-                            <?php
 
-                            } ?>
-                        </select>
-                        <a href="#features-container">
-                            <button type="button">Continue <i class="fa-solid fa-chevron-down"></i></button>
-                        </a>
-                    </div>
-                </div>
-            </section>
-            <div class="features-container" id="features-container">
+
+            <section class="features-container" id="features-container">
+                <h2>Extra Features</h2>
                 <div class="feature-slider">
                     <div class="features">
                         <?= $featuresHtml; ?>
                     </div>
                 </div>
-                <div class="fade-overlay"></div>
+                <!-- <div class="fade-overlay"></div> -->
+            </section>
+            <section class="reservation">
+                <h2>Place Your Reservation</h2>
+                <div class="reservation-flex-container">
+                    <div class="reservation-flex-item personal">
+                        <label for="first-name">First name</label>
+                        <input type="text" name="first-name" id="first-name" required>
+                        <label for="last-name">Last name</label>
+                        <input type="text" name="last-name" id="last-name" required>
+                        <label for="transfer-code">Transfer code</label>
+                        <input type="text" name="transfer-code" id="transfer-code" required>
+                        <button id="reserve-btn" type="submit" form="booking-form">Reserve</button>
+                    </div>
 
-            </div>
-
-            <div id="total-reserve">
-                <label for="room-price">Room subtotal (USD)</label>
-                <input type="text" name="room-price" id="room-price" value="0" readonly>
-                <label for="features-price">Extras subtotal (USD)</label>
-                <ul id="selected-features">
-
-                </ul>
-                <input type="text" name="features-price" id="features-price" value="0" readonly>
-                <label for="total-price">Total price (USD)</label>
-                <input type="text" name="total-price" id="total-price" value="0" readonly>
-                <label for="transfer-code">Transfer code</label>
-                <input type="text" name="transfer-code" id="transfer-code" required>
-                <button type="submit" form="booking-form">Reserve</button>
-            </div>
+                    <div id="reservation-flex-item price">
+                        <label for="room-price">Room subtotal (USD)</label>
+                        <input type="text" name="room-price" id="room-price" value="0" readonly>
+                        <label for="features-price">Extras subtotal (USD)</label>
+                        <input type="text" name="features-price" id="features-price" value="0" readonly>
+                        <label for="total-price">Total price (USD)</label>
+                        <input type="text" name="total-price" id="total-price" value="0" readonly>
+                    </div>
+                </div>
+            </section>
 
         </form>
     </main>

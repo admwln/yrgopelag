@@ -4,17 +4,20 @@ const OUT_OF_RANGE_CLASS = 'out-of-range';
 const BOOKED_CLASS = 'booked';
 
 let dayCount = 0;
+selectedRoomId = parseInt(selectedRoomId);
 
 function onLoad() {
   // SELECTED ROOM
   // When page loads, get value of selectedRoomId (resides in index.php)
   // If selectedRoomId is null or undefined, set value to 1
-  if (selectedRoomId === null || selectedRoomId === undefined) {
+  if (selectedRoomId !== 1 && selectedRoomId !== 2 && selectedRoomId !== 3) {
+    console.log('selectedRoomId is null or undefined, will give it value 1');
     selectedRoomId = 1;
   }
-  // According to selectedRoomId, set class "selected" on corresponding room, both label and .room-info div
+  console.log('selectedRoomId is ' + selectedRoomId);
+  // According to selectedRoomId, set class "selected" on corresponding room, both input[submit] and .room-info div
   const selectedTag = document.querySelector(
-    'input.show-availability:nth-of-type(' + selectedRoomId + ')'
+    '#choose-comfort-form input:nth-of-type(' + selectedRoomId + ')'
   );
   selectedTag.classList.add(SELECTED_CLASS);
 
@@ -23,6 +26,7 @@ function onLoad() {
   );
   selectedRoomInfo.classList.add(SELECTED_CLASS);
 }
+
 onLoad();
 
 // CALENDAR
