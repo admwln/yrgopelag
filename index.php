@@ -101,9 +101,12 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                         <?= $featuresHtml; ?>
                     </div>
                 </div>
-                <button type="button" class="slider-btn left"><i class="fa-solid fa-circle-chevron-left"></i></button>
-                <button type="button" class="slider-btn right"><i class="fa-solid fa-circle-chevron-right"></i></button>
-                <!-- <div class="fade-overlay"></div> -->
+                <button type="button" class="slider-btn left">
+                    <i class="fa-solid fa-circle-chevron-left"></i>
+                </button>
+                <button type="button" class="slider-btn right">
+                    <i class="fa-solid fa-circle-chevron-right"></i>
+                </button>
             </section>
             <section class="reservation">
                 <h2>Place Your Reservation</h2>

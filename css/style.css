@@ -30,6 +30,7 @@ body {
   justify-content: flex-start;
   align-items: center;
   background-color: var(--background-blue);
+  padding: 0;
 }
 
 main {
@@ -37,7 +38,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 0 64px;
+  padding: 0 24px;
 }
 
 main.success {
@@ -70,7 +71,7 @@ main.success {
 
 /* Rooms */
 .rooms {
-  width: calc(50% - 1rem);
+  width: 100%;
 }
 
 #choose-comfort-form input.show-availability {
@@ -110,7 +111,7 @@ main.success {
 /* Calendar */
 
 .calendar {
-  width: calc(50% - 1rem);
+  width: 100%;
   padding: 1rem 4vw;
 }
 
@@ -180,9 +181,8 @@ main.success {
 .reservation {
   background-color: var(--dark-blue);
   margin-top: 70px;
-  margin-left: 1rem;
-  padding: 1rem 4vw;
-  width: calc(50% - 2rem);
+  padding: 1rem;
+  width: 100%;
 }
 
 .reservation-flex-container {
@@ -203,16 +203,15 @@ main.success {
 
 /* Features */
 .features-container {
-  width: calc(50% - 1rem);
+  width: 100%;
   position: relative;
 }
 
 .features {
   width: 100%;
-  /* min-height: 500px; */
   display: flex;
   align-items: flex-start;
-  gap: 1rem;
+  gap: 12px;
   position: relative;
 }
 
@@ -221,15 +220,16 @@ main.success {
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
-  gap: 0.5rem;
+  gap: 12px;
 }
 
 .feature-slider {
+  width: 100%;
   height: fit-content;
   /* position: relative; */
   display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: 12px;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
   overscroll-behavior-x: contain;
@@ -243,7 +243,7 @@ main.success {
 
 .feature {
   min-height: 450px;
-  width: calc(33.33% - 0.67rem);
+  width: 100%;
   scroll-snap-align: start;
   flex-shrink: 0;
   display: flex;
@@ -330,17 +330,17 @@ main.success {
 }
 
 .slider-btn > i {
-  font-size: 2rem;
+  font-size: 1rem;
   color: var(--white);
 }
 
 .slider-btn.left {
-  left: -1.5rem;
+  left: -0.5rem;
   display: none;
 }
 
 .slider-btn.right {
-  right: -2rem;
+  right: -1rem;
 }
 
 /* Reservation form */
@@ -373,15 +373,107 @@ main.success {
   width: 100%;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 1rem;
 }
 
 .reservation-flex-item {
-  width: calc(50% - 0.5rem);
+  width: 100%;
 }
 
-.reservation-flex-item > * {
+/* .reservation-flex-item > * {
   width: unset;
+} */
+
+/* Media query from 1200px */
+@media (min-width: 1200px) {
+  main {
+    padding: 0 64px;
+  }
+
+  .rooms {
+    width: calc(50% - 1rem);
+  }
+
+  .calendar {
+    width: calc(50% - 1rem);
+  }
+
+  /* Reservation */
+  .reservation {
+    width: calc(50% - 2rem);
+    margin-left: 1rem;
+    padding: 1rem 4vw;
+  }
+
+  .reservation-flex-item {
+    width: calc(50% - 0.5rem);
+  }
+
+  /* Features */
+  .features-container {
+    width: calc(50% - 1rem);
+  }
+
+  .features {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    position: relative;
+  }
+
+  .features .cta-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+
+  .feature-slider {
+    height: fit-content;
+    /* position: relative; */
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-color: transparent transparent;
+    scrollbar-width: none;
+  }
+
+  .feature-slider::-webkit-scrollbar {
+    display: none;
+  }
+
+  .feature {
+    min-height: 450px;
+    width: calc(33.33% - 0.67rem);
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: space-between;
+    font-size: 14px;
+    background-color: var(--blue-gray);
+    padding: 1rem;
+    border-radius: 5px;
+  }
+
+  .slider-btn > i {
+    font-size: 2rem;
+  }
+
+  .slider-btn.left {
+    left: -1.5rem;
+  }
+
+  .slider-btn.right {
+    right: -2rem;
+  }
 }
