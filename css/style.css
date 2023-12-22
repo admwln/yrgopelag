@@ -180,8 +180,9 @@ main.success {
 .reservation {
   background-color: var(--dark-blue);
   margin-top: 70px;
+  margin-left: 1rem;
   padding: 1rem 4vw;
-  width: calc(50% - 1rem);
+  width: calc(50% - 2rem);
 }
 
 .reservation-flex-container {
@@ -203,6 +204,7 @@ main.success {
 /* Features */
 .features-container {
   width: calc(50% - 1rem);
+  position: relative;
 }
 
 .features {
@@ -300,6 +302,45 @@ main.success {
   font-family: 'Font Awesome 5 Free';
   content: '\f14a';
   color: hotpink;
+}
+
+/* Slider buttons */
+.slider-btn {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  position: absolute;
+  top: 50%;
+  opacity: 0.25;
+}
+
+.slider-btn:hover {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  opacity: 1;
+}
+
+.slider-btn > i {
+  font-size: 2rem;
+  color: var(--white);
+}
+
+.slider-btn.left {
+  left: -1.5rem;
+  display: none;
+}
+
+.slider-btn.right {
+  right: -2rem;
 }
 
 /* Reservation form */
