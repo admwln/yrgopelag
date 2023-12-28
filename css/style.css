@@ -24,17 +24,19 @@ a:active {
 }
 
 body {
-  width: 100vw;
+  max-width: unset;
+  /* width: 100vw; */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   background-color: var(--background-blue);
   padding: 0;
+  margin: 0;
 }
 
 main {
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -42,7 +44,7 @@ main {
 }
 
 main.success {
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -54,9 +56,9 @@ main.success {
   width: 100%;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   align-items: flex-start;
-  gap: 1rem;
+  justify-content: flex-start;
+  gap: 0.5rem;
 }
 
 #booking-form {
@@ -81,6 +83,7 @@ main.success {
   cursor: pointer;
   padding: 1rem;
   margin-bottom: 0;
+  margin-right: 0;
   border-radius: 5px 5px 0 0;
   /* position: relative; */
 }
@@ -96,7 +99,7 @@ main.success {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 1rem;
-  padding: 3rem;
+  padding: 1rem;
 }
 
 .room-info:not(.selected) {
@@ -112,7 +115,7 @@ main.success {
 
 .calendar {
   width: 100%;
-  padding: 1rem 4vw;
+  /* padding: 2vw; */
 }
 
 .calendar-weekdays,
@@ -120,18 +123,18 @@ main.success {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  row-gap: 1rem;
-  column-gap: 1rem;
+  row-gap: 1vw;
+  column-gap: 1vw;
 }
 
 .calendar-weekdays {
-  margin-bottom: 1rem;
+  margin-bottom: 1vw;
 }
 .calendar-dates li {
   background-color: var(--white);
   width: 100%;
-  min-height: 3vw;
-  padding: 5px;
+  min-height: 2vw;
+  padding: 0.25vw 0.5vw;
   border-radius: 5px;
   color: var(--background-blue);
   position: relative;
@@ -185,11 +188,11 @@ main.success {
   width: 100%;
 }
 
-.reservation-flex-container {
+/* .reservation-flex-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   justify-content: space-between;
-}
+} */
 
 #reserve-btn {
   margin-top: 1rem;
@@ -330,7 +333,7 @@ main.success {
 }
 
 .slider-btn > i {
-  font-size: 1rem;
+  font-size: 2rem;
   color: var(--white);
 }
 
@@ -399,6 +402,10 @@ main.success {
 
   .calendar {
     width: calc(50% - 1rem);
+  }
+
+  .room-info {
+    padding: 3rem;
   }
 
   /* Reservation */

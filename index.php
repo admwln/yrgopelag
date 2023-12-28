@@ -111,6 +111,14 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
             <section class="reservation">
                 <h2>Place Your Reservation</h2>
                 <div class="reservation-flex-container">
+                    <div id="reservation-flex-item price">
+                        <label for="room-price">Room subtotal (USD)</label>
+                        <input type="text" name="room-price" id="room-price" value="0" readonly>
+                        <label for="features-price">Extras subtotal (USD)</label>
+                        <input type="text" name="features-price" id="features-price" value="0" readonly>
+                        <label for="total-price">Total price (USD)</label>
+                        <input type="text" name="total-price" id="total-price" value="0" readonly>
+                    </div>
                     <div class="reservation-flex-item personal">
                         <label for="first-name">First name</label>
                         <input type="text" name="first-name" id="first-name" required>
@@ -119,15 +127,6 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                         <label for="transfer-code">Transfer code</label>
                         <input type="text" name="transfer-code" id="transfer-code" required>
                         <button id="reserve-btn" type="submit" form="booking-form">Reserve</button>
-                    </div>
-
-                    <div id="reservation-flex-item price">
-                        <label for="room-price">Room subtotal (USD)</label>
-                        <input type="text" name="room-price" id="room-price" value="0" readonly>
-                        <label for="features-price">Extras subtotal (USD)</label>
-                        <input type="text" name="features-price" id="features-price" value="0" readonly>
-                        <label for="total-price">Total price (USD)</label>
-                        <input type="text" name="total-price" id="total-price" value="0" readonly>
                     </div>
                 </div>
             </section>
