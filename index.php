@@ -133,7 +133,10 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
 
         </form>
     </main>
-    <footer></footer>
+    <footer>
+        <!-- <i class="fa-brands fa-creative-commons"></i>&nbsp;
+        Adam Welin 2024 -->
+    </footer>
     <script src="js/script.js"></script>
     <script src="js/slider.js"></script>
 </body>

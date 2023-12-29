@@ -4,6 +4,7 @@
   --blue-gray: #283341;
   --blue-lightgray: #3a4a5e;
   --black: #000;
+  --cherry: rgb(128, 26, 77);
   --gray: #f5f5f5;
   --white: rgb(219, 219, 219);
   --red: #ff0000;
@@ -42,8 +43,8 @@ select {
 }
 
 select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  /* -webkit-appearance: none;
+  -moz-appearance: none; */
   text-indent: 1px;
   text-overflow: '';
 }
@@ -67,6 +68,27 @@ body {
   color: var(--white);
 }
 
+header {
+  background-color: var(--dark-blue);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+}
+footer {
+  background-color: var(--blue-lightgray);
+  width: 100%;
+  min-height: 5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  font-size: 0.75rem;
+}
+
 h1 {
   color: var(--white);
   font-size: 2.2rem;
@@ -85,15 +107,6 @@ main {
   flex-direction: column;
   justify-content: flex-start;
   padding: 12px 24px;
-}
-
-main.success {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 0 64px;
 }
 
 #choose-comfort-form {
@@ -269,7 +282,7 @@ main.success {
 
 #reserve-btn {
   margin-top: 1rem;
-  background-color: rgb(128, 26, 77);
+  background-color: var(--cherry);
 }
 
 .personal input[type='text'] {
@@ -337,7 +350,7 @@ main.success {
 }
 
 .feature h3 {
-  height: 4rem;
+  height: 2rem;
   font-size: 16px;
   margin: 0 0 0.5rem 0;
   padding: 0;
@@ -348,6 +361,10 @@ main.success {
   border-radius: 5px;
   /* float: right; */
   margin-bottom: 0.25rem;
+}
+
+.feature p {
+  margin-top: 0.5rem;
 }
 
 .feature .checkbox-container {
@@ -481,6 +498,12 @@ main.success {
 
 /* Media query from 1200px */
 @media (min-width: 1200px) {
+  header,
+  footer {
+    justify-content: flex-start;
+    padding: 12px 64px;
+  }
+
   main {
     padding: 24px 64px;
   }
@@ -595,6 +618,10 @@ main.success {
     background-color: var(--blue-gray);
     padding: 1rem;
     border-radius: 5px;
+  }
+
+  .feature h3 {
+    height: 3.5rem;
   }
 
   .slider-btn > i {
