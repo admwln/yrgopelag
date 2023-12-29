@@ -6,6 +6,7 @@
   --black: #000;
   --cherry: rgb(128, 26, 77);
   --gray: #f5f5f5;
+  --links: rgb(65, 173, 255);
   --white: rgb(219, 219, 219);
   --red: #ff0000;
 }
@@ -22,6 +23,7 @@ a:visited,
 a:hover,
 a:active {
   text-decoration: none;
+  color: var(--links);
 }
 
 input,
@@ -70,7 +72,11 @@ body {
 
 header {
   background-color: var(--dark-blue);
+  background-image: url('/images/header.png');
+  background-repeat: no-repeat;
+  background-position: bottom;
   width: 100%;
+  min-height: 15dvh;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -78,15 +84,16 @@ header {
   padding: 12px 24px;
 }
 footer {
-  background-color: var(--blue-lightgray);
+  background-color: var(--dark-blue);
   width: 100%;
-  min-height: 5rem;
+  min-height: 15dvh;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 12px 24px;
   font-size: 0.75rem;
+  margin-top: 2rem;
 }
 
 h1 {
@@ -312,6 +319,10 @@ main {
   gap: 12px;
 }
 
+.cta-container label {
+  color: var(--links);
+}
+
 .feature-slider {
   width: 100%;
   height: fit-content;
@@ -345,9 +356,9 @@ main {
   border-radius: 5px;
 }
 
-.feature.selected {
+/* .feature.selected {
   background-color: var(--blue-lightgray);
-}
+} */
 
 .feature h3 {
   height: 2rem;
