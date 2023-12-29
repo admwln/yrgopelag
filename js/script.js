@@ -233,3 +233,19 @@ function calculateTotalPrice() {
     parseInt(roomPriceInput.value) + parseInt(featuresPriceInput.value);
   totalPriceInput.value = totalPrice;
 }
+
+// Enable Room type dropdown on submit
+const roomDropdown = document.querySelector('#room-type');
+
+document
+  .querySelector('#booking-form')
+  .addEventListener('submit', function (event) {
+    // Prevent the form from being submitted immediately
+    event.preventDefault();
+
+    // Enable room type dropdown
+    roomDropdown.disabled = false;
+
+    // Manually submit the form
+    this.submit();
+  });

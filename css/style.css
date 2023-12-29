@@ -25,6 +25,7 @@ a:active {
 
 input,
 select {
+  color: var(--white);
   background-color: var(--dark-blue);
   font-family: inherit;
   font-size: inherit;
@@ -83,7 +84,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 0 24px;
+  padding: 12px 24px;
 }
 
 main.success {
@@ -153,10 +154,18 @@ main.success {
 
 .room-img {
   width: 100%;
-  padding: 1rem 1rem 0 1rem;
+  /* padding: 1rem 1rem 0 1rem; */
 }
 
 /* Calendar */
+.date-container select,
+.date-container select:disabled,
+.date-container input {
+  opacity: 1;
+  width: 100%;
+  font-size: 0.75rem;
+  color: var(--white);
+}
 
 .calendar {
   width: 100%;
@@ -180,10 +189,11 @@ main.success {
   margin-bottom: 1vw;
 }
 .calendar-dates li {
+  font-size: 0.75rem;
   background-color: var(--white);
   width: 100%;
-  min-height: 2vw;
-  padding: 0.15vw 0.25vw;
+  min-height: 12vw;
+  padding: 0.5vw 1vw;
   border-radius: 5px;
   color: var(--background-blue);
   position: relative;
@@ -241,6 +251,7 @@ main.success {
   color: var(--white);
   font-family: inherit;
   font-size: inherit;
+  font-weight: bold;
   margin-right: 6px;
   margin-bottom: 6px;
   padding: 10px 30px;
@@ -262,7 +273,7 @@ main.success {
 }
 
 .personal input[type='text'] {
-  background-color: var(--white);
+  background: var(--white);
   color: #000;
 }
 
@@ -405,7 +416,7 @@ main.success {
 }
 
 .slider-btn.right {
-  right: -1rem;
+  right: -0.5rem;
 }
 
 /* Reservation form */
@@ -419,11 +430,6 @@ main.success {
 }
 .date-container:nth-of-type(1) {
   width: calc(30% - 0.67rem);
-}
-
-.date-container input,
-.date-container select {
-  width: 100%;
 }
 
 .arrival-departure {
@@ -448,14 +454,35 @@ main.success {
   width: 100%;
 }
 
+.reservation-flex-item.price label {
+  width: 100%;
+}
+.reservation-flex-item.price label:nth-of-type(3) {
+  margin-top: 2rem;
+}
+
 .reservation-flex-item.price input {
+  font-size: 1rem;
+  width: 2rem;
   color: var(--white);
+  text-align: right;
+  padding-left: 0;
+  padding-right: 0;
+  margin-right: 0.5rem;
+}
+
+.reservation-flex-item.price input:nth-of-type(3) {
+  font-size: 1.5rem;
+}
+
+.reservation input {
+  width: 100%;
 }
 
 /* Media query from 1200px */
 @media (min-width: 1200px) {
   main {
-    padding: 0 64px;
+    padding: 24px 64px;
   }
 
   .rooms {
@@ -468,6 +495,22 @@ main.success {
 
   .room-info {
     padding: 3rem;
+  }
+  /* Calendar */
+  /* Calendar */
+  .date-container select,
+  .date-container select:disabled,
+  .date-container input {
+    opacity: 1;
+    width: 100%;
+    font-size: 1rem;
+    color: var(--white);
+  }
+
+  .calendar-dates li {
+    font-size: 1rem;
+    padding: 0.25rem 0.45rem;
+    min-height: 4rem;
   }
 
   /* Reservation */

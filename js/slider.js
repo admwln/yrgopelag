@@ -34,7 +34,8 @@ rightBtn.addEventListener('click', () => {
     leftBtn.style.display = 'none';
   }
 
-  //If scrolled all the way to the left, hide left button
+  // TODO: Does not work on mobile
+  //If scrolled all the way to the right, hide right button
   if (
     document.querySelector('.feature-slider').scrollLeft >
     document.querySelector('.feature-slider').scrollWidth - 3 * sliderWidth

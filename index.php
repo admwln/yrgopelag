@@ -45,7 +45,7 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                         <img class="room-img" src="<?= $imgUrl; ?>" alt="<?= $room['comfort_level']; ?>">
                         <h3><?= $room['comfort_level']; ?></h3>
                         <p><?= $room['description']; ?></p>
-                        <p>Room rate: <span class="room-price"><?= $room['price'] . '.00'; ?></span> USD</p>
+                        <p>Room rate: <span class="room-price"><?= $room['price']; ?></span> USD</p>
                     </div>
                 <?php
                 } ?>
@@ -56,7 +56,7 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                 <div class="arrival-departure">
                     <div class="date-container">
                         <label for="room-type">Room</label>
-                        <select name="room-type" id="room-type">
+                        <select name="room-type" id="room-type" disabled>
                             <?php
                             foreach ($rooms as $key => $room) { ?>
                                 <!-- TODO: disable dropdown -->
@@ -112,12 +112,12 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                 <h2>Place Your Reservation</h2>
                 <div class="reservation-flex-container">
                     <div class="reservation-flex-item price">
-                        <label for="room-price">Room subtotal (USD)</label>
-                        <input type="text" name="room-price" id="room-price" value="0" readonly>
-                        <label for="features-price">Extras subtotal (USD)</label>
-                        <input type="text" name="features-price" id="features-price" value="0" readonly>
-                        <label for="total-price">Total price (USD)</label>
-                        <input type="text" name="total-price" id="total-price" value="0" readonly>
+                        <label for="room-price">Room subtotal</label>
+                        <input type="text" name="room-price" id="room-price" value="0" readonly><span class="usd">USD</span>
+                        <label for="features-price">Extras subtotal</label>
+                        <input type="text" name="features-price" id="features-price" value="0" readonly><span class="usd">USD</span>
+                        <label for="total-price">Total price</label>
+                        <input type="text" name="total-price" id="total-price" value="0" readonly><span class="usd">USD</span>
                     </div>
                     <div class="reservation-flex-item personal">
                         <label for="first-name">First name</label>
