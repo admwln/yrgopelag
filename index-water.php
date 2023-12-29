@@ -13,7 +13,7 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/water.css'> -->
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/water.css'>
     <link rel="stylesheet" href="css/style.css">
     <title><?= $_ENV['HOTEL_NAME']; ?></title>
     <script>
@@ -45,7 +45,7 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                         <img class="room-img" src="<?= $imgUrl; ?>" alt="<?= $room['comfort_level']; ?>">
                         <h3><?= $room['comfort_level']; ?></h3>
                         <p><?= $room['description']; ?></p>
-                        <p>Room rate: <span class="room-price"><?= $room['price']; ?></span> USD</p>
+                        <p>Room rate: <span class="room-price"><?= $room['price'] . '.00'; ?></span> USD</p>
                     </div>
                 <?php
                 } ?>
@@ -56,7 +56,7 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                 <div class="arrival-departure">
                     <div class="date-container">
                         <label for="room-type">Room</label>
-                        <select name="room-type" id="room-type" disabled>
+                        <select name="room-type" id="room-type">
                             <?php
                             foreach ($rooms as $key => $room) { ?>
                                 <!-- TODO: disable dropdown -->
@@ -111,13 +111,13 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
             <section class="reservation">
                 <h2>Place Your Reservation</h2>
                 <div class="reservation-flex-container">
-                    <div class="reservation-flex-item price">
-                        <label for="room-price">Room subtotal</label>
-                        <input type="text" name="room-price" id="room-price" value="0" readonly><span class="usd">USD</span>
-                        <label for="features-price">Extras subtotal</label>
-                        <input type="text" name="features-price" id="features-price" value="0" readonly><span class="usd">USD</span>
-                        <label for="total-price">Total price</label>
-                        <input type="text" name="total-price" id="total-price" value="0" readonly><span class="usd">USD</span>
+                    <div id="reservation-flex-item price">
+                        <label for="room-price">Room subtotal (USD)</label>
+                        <input type="text" name="room-price" id="room-price" value="0" readonly>
+                        <label for="features-price">Extras subtotal (USD)</label>
+                        <input type="text" name="features-price" id="features-price" value="0" readonly>
+                        <label for="total-price">Total price (USD)</label>
+                        <input type="text" name="total-price" id="total-price" value="0" readonly>
                     </div>
                     <div class="reservation-flex-item personal">
                         <label for="first-name">First name</label>
