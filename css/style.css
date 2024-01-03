@@ -72,8 +72,7 @@ body {
 }
 
 header {
-  background-color: var(--dark-blue);
-  background-image: url('/images/header.png');
+  background-image: url('../images/header.png');
   background-repeat: no-repeat;
   background-position: bottom;
   width: 100%;

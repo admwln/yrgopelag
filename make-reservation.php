@@ -138,8 +138,6 @@ if (count($featureIds) > 0) {
             'cost' => $result['price']
         ];
         array_push($selectedFeatures, $selectedFeature);
-
-        echo '<pre>';
     }
 }
 
