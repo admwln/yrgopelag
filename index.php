@@ -139,6 +139,7 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
         </form>
     </main>
     <footer>
+        <a href="login.php">Admin</a>
     </footer>
     <script src="js/script.js"></script>
     <script src="js/slider.js"></script>
