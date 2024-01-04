@@ -28,7 +28,8 @@ a:active {
 }
 
 input,
-select {
+select,
+textarea {
   color: var(--white);
   background-color: var(--dark-blue);
   font-family: inherit;
@@ -45,11 +46,8 @@ select {
   color: var(--white);
 }
 
-select {
-  /* -webkit-appearance: none;
-  -moz-appearance: none; */
-  text-indent: 1px;
-  text-overflow: '';
+select#room-type {
+  all: unset;
 }
 
 label {

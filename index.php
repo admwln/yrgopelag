@@ -64,7 +64,6 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                         <select name="room-type" id="room-type" disabled>
                             <?php
                             foreach ($rooms as $key => $room) { ?>
-                                <!-- TODO: disable dropdown -->
                                 <option value="<?= $room['id']; ?>" <?= ($room['id'] == $selectedRoomId) ? 'selected' : ''; ?>><?= $room['comfort_level']; ?></option>
                             <?php
 

@@ -1,0 +1,47 @@
+:root {
+  --background-blue: #222b37;
+  --dark-blue: #161f27;
+  --blue-gray: #283341;
+  --blue-lightgray: #3a4a5e;
+  --black: #000;
+  --cherry: rgb(128, 26, 77);
+  --gray: #f5f5f5;
+  --links: rgb(65, 173, 255);
+  --white: rgb(219, 219, 219);
+  --red: #ff0000;
+}
+
+footer input[type='submit'] {
+  background-color: var(--dark-blue);
+  color: var(--links);
+  cursor: pointer;
+}
+
+.admin-rooms,
+.admin-features {
+  max-width: 100%;
+}
+
+.admin-rooms,
+.admin-features,
+#update-room {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.update-message {
+  border-radius: 5px;
+  padding: 2rem;
+  text-align: center;
+  background-color: var(--blue-lightgray);
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 400px) {
+  .update-message,
+  .admin-rooms,
+  .admin-features {
+    max-width: 390px;
+  }
+}

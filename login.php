@@ -4,6 +4,14 @@ declare(strict_types=1);
 
 require_once(__DIR__ . '/autoload.php');
 
+// Check if user is logged in
+if (isset($_SESSION['loggedIn'])) {
+    // User IS logged in
+    // Redirect to admin.php
+    header('Location: admin.php');
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +27,6 @@ require_once(__DIR__ . '/autoload.php');
     <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/success-style.css">
     <title><?= $_ENV['HOTEL_NAME']; ?> - Login</title>
 </head>
 
