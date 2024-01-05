@@ -34,6 +34,9 @@ unset($_SESSION['bookingId']);
 <body>
     <header>
         <a href="index.php">
+            <?php
+            echo displayStars(intval($_ENV['STARS']));
+            ?>
             <h1><?= $_ENV['HOTEL_NAME']; ?></h1>
         </a>
     </header>

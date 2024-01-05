@@ -4,6 +4,7 @@ require_once(__DIR__ . '/get-rooms.php');
 require_once(__DIR__ . '/get-features.php');
 
 $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
+
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +30,9 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
 <body>
     <header>
         <a href="index.php">
+            <?php
+            echo displayStars(intval($_ENV['STARS']));
+            ?>
             <h1><?= $_ENV['HOTEL_NAME']; ?></h1>
         </a>
     </header>

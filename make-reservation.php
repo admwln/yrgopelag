@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 require_once(__DIR__ . '/autoload.php');
-require_once(__DIR__ . '/hotelFunctions.php');
 
 // Get posted data
 $roomId = $_POST['room-type'];

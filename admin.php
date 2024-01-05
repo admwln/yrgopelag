@@ -38,9 +38,6 @@ else if (isset($_POST['select-feature']) && $_POST['select-feature'] != 'x') {
     // feature id is not set, default to feature index 0
     $featureToUpdate = 0;
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +60,10 @@ else if (isset($_POST['select-feature']) && $_POST['select-feature'] != 'x') {
 <body>
     <header>
         <a href="index.php">
-            <h1><?= $_ENV['HOTEL_NAME']; ?> | Admin</h1>
+            <?php
+            echo displayStars(intval($_ENV['STARS']));
+            ?>
+            <h1><?= $_ENV['HOTEL_NAME']; ?></h1>
         </a>
     </header>
     <section class="update-message-container">
