@@ -27,6 +27,7 @@ if (isset($_SESSION['loggedIn'])) {
     <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin-style.css">
     <title><?= $_ENV['HOTEL_NAME']; ?> - Login</title>
 </head>
 
@@ -36,16 +37,28 @@ if (isset($_SESSION['loggedIn'])) {
             <h1><?= $_ENV['HOTEL_NAME']; ?></h1>
         </a>
     </header>
-    <main class="admin">
+    <section class="update-message-container">
+        <?php
+        if (isset($_SESSION['login-error'])) { ?>
+            <p class="update-message error">
+                <?= $_SESSION['login-error']; ?>
+            </p>
+        <?php
+            unset($_SESSION['login-error']);
+        }
+        ?>
+    </section>
+
+    <main>
 
         <h2>Login</h2>
+
         <form action="verify.php" method="post">
-            <div><label for="username">Username</label>
-                <input type="text" name="username" id="username" required>
+            <div>
+                <input type="text" name="username" id="username" placeholder="Username" required>
             </div>
             <div>
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" required>
+                <input type="password" name="password" id="password" placeholder="Password" required>
             </div>
             <input type="submit" value="Login">
         </form>

@@ -22,9 +22,9 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         // Redirect to admin.php
         header('Location: admin.php');
     } else {
-        // Invalid credential
-        echo '<pre>';
-        die(var_dump('Invalid credentials'));
+        // Invalid credentials, redirect to login.php and add error message to session variable
+        $_SESSION['login-error'] = 'Invalid credentials!';
+        header('Location: login.php');
     }
 } else {
     header('Location: login.php');
