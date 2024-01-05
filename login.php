@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 require_once(__DIR__ . '/autoload.php');
 
-// Get booking details array from session variable
-$bookingDetails = $_SESSION['bookingDetails'];
-$bookingId = $_SESSION['bookingId'];
+// Check if user is logged in
+if (isset($_SESSION['loggedIn'])) {
+    // User IS logged in
+    // Redirect to admin.php
+    header('Location: admin.php');
+}
 
-// Unset session variables
-unset($_SESSION['calendar']);
-unset($_SESSION['bookingDetails']);
-unset($_SESSION['bookingId']);
+
 ?>
 
 <!DOCTYPE html>
@@ -27,8 +27,8 @@ unset($_SESSION['bookingId']);
     <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/success-style.css">
-    <title><?= $_ENV['HOTEL_NAME']; ?> - Booking Confirmation</title>
+    <link rel="stylesheet" href="css/admin-style.css">
+    <title><?= $_ENV['HOTEL_NAME']; ?> | Login</title>
 </head>
 
 <body>
@@ -40,12 +40,31 @@ unset($_SESSION['bookingId']);
             <h1><?= $_ENV['HOTEL_NAME']; ?></h1>
         </a>
     </header>
-    <main class="success">
+    <section class="update-message-container">
+        <?php
+        if (isset($_SESSION['login-error'])) { ?>
+            <p class="update-message error">
+                <?= $_SESSION['login-error']; ?>
+            </p>
+        <?php
+            unset($_SESSION['login-error']);
+        }
+        ?>
+    </section>
 
-        <h2>Booking Confirmation</h2>
-        <p>Thank you for choosing <?= $_ENV['HOTEL_NAME']; ?>!</p>
-        <p>Here are your booking details:</p>
-        <a href="success-<?= $bookingId ?>.json" target="_blank">Show details <i class="fa-solid fa-up-right-from-square"></i></a>
+    <main>
+
+        <h2>Login</h2>
+
+        <form action="verify.php" method="post">
+            <div>
+                <input type="text" name="username" id="username" placeholder="Username" required>
+            </div>
+            <div>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+            </div>
+            <input type="submit" value="Login">
+        </form>
     </main>
 </body>
 

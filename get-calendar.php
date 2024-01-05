@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 require_once(__DIR__ . '/autoload.php');
-require_once(__DIR__ . '/hotelFunctions.php');
 
 // If no room ID is set, 1 is default
 $roomId = 1;

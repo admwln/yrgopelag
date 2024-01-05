@@ -28,7 +28,8 @@ a:active {
 }
 
 input,
-select {
+select,
+textarea {
   color: var(--white);
   background-color: var(--dark-blue);
   font-family: inherit;
@@ -45,11 +46,8 @@ select {
   color: var(--white);
 }
 
-select {
-  /* -webkit-appearance: none;
-  -moz-appearance: none; */
-  text-indent: 1px;
-  text-overflow: '';
+select#room-type {
+  all: unset;
 }
 
 label {
@@ -80,7 +78,7 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   padding: 12px 24px;
 }
 footer {
@@ -282,12 +280,6 @@ main {
   cursor: pointer;
 }
 
-/* .reservation-flex-container {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-} */
-
 #reserve-btn {
   margin-top: 1rem;
   background-color: var(--cherry);
@@ -356,10 +348,6 @@ main {
   padding: 1rem;
   border-radius: 5px;
 }
-
-/* .feature.selected {
-  background-color: var(--blue-lightgray);
-} */
 
 .feature h3 {
   height: 2rem;
@@ -510,6 +498,15 @@ main {
 
 /* Media query from 1200px */
 @media (min-width: 1200px) {
+  header {
+    width: 100%;
+    min-height: 36dvh;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    padding: 12px 24px;
+  }
+
   header,
   footer {
     justify-content: flex-start;

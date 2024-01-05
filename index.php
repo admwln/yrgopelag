@@ -4,6 +4,7 @@ require_once(__DIR__ . '/get-rooms.php');
 require_once(__DIR__ . '/get-features.php');
 
 $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
+
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +30,9 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
 <body>
     <header>
         <a href="index.php">
+            <?php
+            echo displayStars(intval($_ENV['STARS']));
+            ?>
             <h1><?= $_ENV['HOTEL_NAME']; ?></h1>
         </a>
     </header>
@@ -64,7 +68,6 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                         <select name="room-type" id="room-type" disabled>
                             <?php
                             foreach ($rooms as $key => $room) { ?>
-                                <!-- TODO: disable dropdown -->
                                 <option value="<?= $room['id']; ?>" <?= ($room['id'] == $selectedRoomId) ? 'selected' : ''; ?>><?= $room['comfort_level']; ?></option>
                             <?php
 
@@ -139,6 +142,7 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
         </form>
     </main>
     <footer>
+        <a href="login.php">Admin</a>
     </footer>
     <script src="js/script.js"></script>
     <script src="js/slider.js"></script>

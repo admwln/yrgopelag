@@ -59,3 +59,12 @@ function sanVal(string $myString): string
     $myString = trim($myString);
     return $myString;
 }
+
+function displayStars(int $stars): string
+{
+    $starIcons = '';
+    for ($i = 0; $i < $stars; $i++) {
+        $starIcons .= '<i class="fa-solid fa-star"></i> ';
+    }
+    return $starIcons;
+}
