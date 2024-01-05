@@ -7,7 +7,6 @@ require_once(__DIR__ . '/hotelFunctions.php');
 
 // Get posted data
 $roomId = $_POST['update-room-id'];
-$roomId = sanVal($roomId);
 $comfortLevel = $_POST['update-comfort-level'];
 $comfortLevel = sanVal($comfortLevel);
 $updateDescription = $_POST['update-description'];

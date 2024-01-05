@@ -11,6 +11,24 @@
   --red: #ff0000;
 }
 
+main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 4rem;
+}
+
+main input[type='submit'] {
+  background-color: var(--cherry);
+  color: var(--white);
+  cursor: pointer;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: fit-content;
+}
+
 footer input[type='submit'] {
   background-color: var(--dark-blue);
   color: var(--links);
@@ -19,15 +37,21 @@ footer input[type='submit'] {
 
 .admin-rooms,
 .admin-features {
-  max-width: 100%;
+  width: 100%;
 }
 
 .admin-rooms,
 .admin-features,
-#update-room {
+#update-room,
+#update-feature {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.update-message-container {
+  width: 100%;
+  padding: 12px 24px;
 }
 
 .update-message {
@@ -36,12 +60,26 @@ footer input[type='submit'] {
   text-align: center;
   background-color: var(--blue-lightgray);
   margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.admin h2:nth-of-type(1) {
+  margin-top: 2rem;
+}
+
+label {
+  margin-top: 1rem;
 }
 
 @media (min-width: 400px) {
   .update-message,
   .admin-rooms,
   .admin-features {
-    max-width: 390px;
+    width: 390px;
+  }
+
+  .update-message-container {
+    width: 100%;
+    padding: 24px 64px;
   }
 }
