@@ -45,7 +45,7 @@ unset($_SESSION['bookingId']);
         <h2>Booking Confirmation</h2>
         <p>Thank you for choosing <?= $_ENV['HOTEL_NAME']; ?>!</p>
         <p>Here are your booking details:</p>
-        <a href="success-<?= $bookingId ?>.json" target="_blank">Show details <i class="fa-solid fa-up-right-from-square"></i></a>
+        <a href="success/success-<?= $bookingId ?>.json" target="_blank">Show details <i class="fa-solid fa-up-right-from-square"></i></a>
     </main>
 </body>
 

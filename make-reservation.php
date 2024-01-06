@@ -176,7 +176,7 @@ $_SESSION['bookingDetails'] = $bookingDetails;
 $bookingDetails = json_encode($bookingDetails);
 
 // Save string to file success-<booking id>.json
-file_put_contents('success-' . $bookingId . '.json', $bookingDetails);
+file_put_contents('success/success-' . $bookingId . '.json', $bookingDetails);
 
 
 // Deposit transfer code at the bank using Guzzle
