@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once(__DIR__ . '/autoload.php');
+require_once(__DIR__ . '/../autoload.php');
 
 // If no room ID is set, 1 is default
 $roomId = 1;
@@ -23,7 +23,7 @@ if (isset($_POST['choose-comfort'])) {
 $_SESSION['roomId'] = $roomId;
 
 // Connect to hotel.db SQLite database, and check room availability in bookings table
-$db = connect('hotel.db');
+$db = connect('../hotel.db');
 $statement = $db->prepare('SELECT arrival, departure FROM bookings WHERE room_id = :roomId');
 $statement->bindValue(':roomId', $roomId, PDO::PARAM_INT);
 $result = $statement->execute();
@@ -57,12 +57,13 @@ $calendarHtml = $calendar->generateCalendar($occupancy, $roomName);
 $_SESSION['calendar'] = $calendarHtml;
 
 if (!isset($_POST['choose-comfort'])) {
-    return $_SESSION['calendar'];
+    // return $_SESSION['calendar'];
+    return $calendarHtml;
 }
 
 if (isset($_POST['choose-comfort'])) {
     // Redirect back to index.php
-    header("Location: index.php");
+    header("Location: ../index.php");
 }
 
 // Calendar class, for hotel bookings

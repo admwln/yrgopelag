@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once(__DIR__ . '/autoload.php');
+require_once(__DIR__ . '/../autoload.php');
 
 // Get posted data
 $roomId = $_POST['room-type'];
@@ -32,7 +32,7 @@ if (!isRoomAvailable($roomId, $arrival, $departure)) {
 function isRoomAvailable($roomId, $arrival, $departure)
 {
     // Check if there are any bookings for the selected room and dates
-    $db = connect('hotel.db');
+    $db = connect('../hotel.db');
     $sql = 'SELECT * FROM bookings WHERE room_id = :roomId AND (arrival >= :arrival AND departure <= :departure);';
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':arrival', $arrival, PDO::PARAM_STR);
@@ -99,7 +99,7 @@ function checkTransferCodeWithBank($transferCode, $totalPrice)
 }
 
 // If all checks are ok, create a reservation in database
-$db = connect('hotel.db');
+$db = connect('../hotel.db');
 $sql = 'INSERT INTO bookings (room_id, guest_firstname, guest_lastname, arrival, departure, price, transfer_code) VALUES (:roomId, :firstName, :lastName, :arrival, :departure, :totalPrice, :transferCode);';
 $stmt = $db->prepare($sql);
 $stmt->bindParam(':roomId', $roomId, PDO::PARAM_INT);
@@ -143,7 +143,7 @@ if (count($featureIds) > 0) {
 // // Get the room name (comfort level) of the selected room
 // function getComfortLevel($roomId)
 // {
-//     $db = connect('hotel.db');
+//     $db = connect('../hotel.db');
 //     $sql = 'SELECT comfort_level FROM rooms WHERE id = :roomId;';
 //     $stmt = $db->prepare($sql);
 //     $stmt->bindParam(':roomId', $roomId, PDO::PARAM_INT);
@@ -176,7 +176,7 @@ $_SESSION['bookingDetails'] = $bookingDetails;
 $bookingDetails = json_encode($bookingDetails);
 
 // Save string to file success-<booking id>.json
-file_put_contents('success/success-' . $bookingId . '.json', $bookingDetails);
+file_put_contents('../success/success-' . $bookingId . '.json', $bookingDetails);
 
 
 // Deposit transfer code at the bank using Guzzle

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once(__DIR__ . '/autoload.php');
+require_once(__DIR__ . '/../autoload.php');
 
 // Get posted data
 $roomId = $_POST['update-room-id'];
@@ -14,7 +14,7 @@ $updatePrice = $_POST['update-price'];
 $updatePrice = sanVal($updatePrice);
 
 // Update room in database
-$db = connect('hotel.db');
+$db = connect('../hotel.db');
 $sql = 'UPDATE rooms SET comfort_level = :comfortLevel, description = :description, price = :price WHERE id = :roomId;';
 $stmt = $db->prepare($sql);
 $stmt->bindParam(':comfortLevel', $comfortLevel, PDO::PARAM_STR);

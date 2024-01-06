@@ -7,7 +7,7 @@ session_start();
 require(__DIR__ . '/vendor/autoload.php');
 
 // Always requre hotelFunctions
-require(__DIR__ . '/hotelFunctions.php');
+require(__DIR__ . '/php/hotelFunctions.php');
 
 // Tell PHP to use this fine package
 use Dotenv\Dotenv;
