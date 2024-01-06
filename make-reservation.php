@@ -166,7 +166,7 @@ $bookingDetails = array(
     'features' => $selectedFeatures,
     'additional_info' => [
         'greeting' => 'Thank you for choosing ' . $_ENV['HOTEL_NAME'] . '!',
-        'imageUrl' => 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Hotel_Boscolo_Exedra_Nice.jpg',
+        'imageUrl' => 'https://adamwelin.se/overview/images/success.png',
     ]
 );
 
@@ -176,7 +176,7 @@ $_SESSION['bookingDetails'] = $bookingDetails;
 $bookingDetails = json_encode($bookingDetails);
 
 // Save string to file success-<booking id>.json
-file_put_contents('success-' . $bookingId . '.json', $bookingDetails);
+file_put_contents('success/success-' . $bookingId . '.json', $bookingDetails);
 
 
 // Deposit transfer code at the bank using Guzzle
