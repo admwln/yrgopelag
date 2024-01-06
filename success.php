@@ -12,6 +12,7 @@ $bookingId = $_SESSION['bookingId'];
 unset($_SESSION['calendar']);
 unset($_SESSION['bookingDetails']);
 unset($_SESSION['bookingId']);
+unset($_SESSION['roomId']);
 ?>
 
 <!DOCTYPE html>
