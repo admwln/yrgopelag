@@ -166,7 +166,7 @@ $bookingDetails = array(
     'features' => $selectedFeatures,
     'additional_info' => [
         'greeting' => 'Thank you for choosing ' . $_ENV['HOTEL_NAME'] . '!',
-        'imageUrl' => 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Hotel_Boscolo_Exedra_Nice.jpg',
+        'imageUrl' => 'https://adamwelin.se/overview/images/success.png',
     ]
 );
 
