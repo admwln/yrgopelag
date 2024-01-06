@@ -41,7 +41,6 @@ if (!isset($_SESSION['calendar'])) {
         </a>
     </header>
     <main>
-        <!-- <h2>Our Rooms</h2> -->
         <div class="choose-comfort">
             <form id="choose-comfort-form" action="php/get-calendar.php" method="post">
                 <input type="submit" class="show-availability" name="choose-comfort" value="Budget"></input>
@@ -84,7 +83,7 @@ if (!isset($_SESSION['calendar'])) {
                     </div>
                     <div class="date-container">
                         <label for="departure">Departure</label>
-                        <input type="text" name="departure" id="departure" min="2024-01-01" max="2024-01-31" readonly required>
+                        <input type="text" name="departure" id="departure" min="2024-01-01" max="2024-01-31" readlonly required>
                     </div>
                 </div>
 
@@ -98,11 +97,6 @@ if (!isset($_SESSION['calendar'])) {
                     echo require_once(__DIR__ . '/php/get-calendar.php');
                 }
                 ?>
-                <!-- <a href="#features-container">
-                    <button type="button" class="continue">
-                        Continue <i class="fa-solid fa-chevron-down"></i>
-                    </button>
-                </a> -->
             </section>
 
 
