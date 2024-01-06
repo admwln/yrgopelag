@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
-require_once(__DIR__ . '/autoload.php');
+require_once(__DIR__ . '/../autoload.php');
+
+// Unset roomId session variable
+unset($_SESSION['roomId']);
 
 // Check if user is logged in
 if (isset($_SESSION['loggedIn'])) {
@@ -26,14 +29,14 @@ if (isset($_SESSION['loggedIn'])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/admin-style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin-style.css">
     <title><?= $_ENV['HOTEL_NAME']; ?> | Login</title>
 </head>
 
 <body>
     <header>
-        <a href="index.php">
+        <a href="../index.php">
             <?php
             echo displayStars(intval($_ENV['STARS']));
             ?>

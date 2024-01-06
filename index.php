@@ -1,9 +1,14 @@
 <?php
 require_once(__DIR__ . '/autoload.php');
-require_once(__DIR__ . '/get-rooms.php');
-require_once(__DIR__ . '/get-features.php');
+require_once(__DIR__ . '/php/get-rooms.php');
+require_once(__DIR__ . '/php/get-features.php');
 
 $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
+
+// If $_SESSION['calendar'] is not set, set $selectedRoomId to 1
+if (!isset($_SESSION['calendar'])) {
+    $selectedRoomId = 1;
+}
 
 ?>
 
@@ -19,7 +24,6 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/water.css'> -->
     <link rel="stylesheet" href="css/style.css">
     <title><?= $_ENV['HOTEL_NAME']; ?></title>
     <script>
@@ -37,15 +41,14 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
         </a>
     </header>
     <main>
-        <!-- <h2>Our Rooms</h2> -->
         <div class="choose-comfort">
-            <form id="choose-comfort-form" action="get-calendar.php" method="post">
+            <form id="choose-comfort-form" action="php/get-calendar.php" method="post">
                 <input type="submit" class="show-availability" name="choose-comfort" value="Budget"></input>
                 <input type="submit" class="show-availability" name="choose-comfort" value="Standard"></input>
                 <input type="submit" class="show-availability" name="choose-comfort" value="Luxury"></input>
             </form>
         </div>
-        <form class="booking-form" id="booking-form" action="make-reservation.php" method="post">
+        <form class="booking-form" id="booking-form" action="php/make-reservation.php" method="post">
             <section class="rooms">
                 <?php
                 foreach ($rooms as $key => $room) {
@@ -80,7 +83,7 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                     </div>
                     <div class="date-container">
                         <label for="departure">Departure</label>
-                        <input type="text" name="departure" id="departure" min="2024-01-01" max="2024-01-31" readonly required>
+                        <input type="text" name="departure" id="departure" min="2024-01-01" max="2024-01-31" readlonly required>
                     </div>
                 </div>
 
@@ -91,14 +94,9 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
                     unset($_SESSION['calendar']);
                 } else {
                     // Default to room 1 (budget)
-                    echo require_once(__DIR__ . '/get-calendar.php');
+                    echo require_once(__DIR__ . '/php/get-calendar.php');
                 }
                 ?>
-                <!-- <a href="#features-container">
-                    <button type="button" class="continue">
-                        Continue <i class="fa-solid fa-chevron-down"></i>
-                    </button>
-                </a> -->
             </section>
 
 
@@ -142,7 +140,7 @@ $selectedRoomId = (isset($_SESSION['roomId'])) ? $_SESSION['roomId'] : 1;
         </form>
     </main>
     <footer>
-        <a href="login.php">Admin</a>
+        <a href="php/login.php">Admin</a>
     </footer>
     <script src="js/script.js"></script>
     <script src="js/slider.js"></script>

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once(__DIR__ . '/autoload.php');
+require_once(__DIR__ . '/../autoload.php');
 
 // Get posted data
 $roomId = $_POST['room-type'];
@@ -21,18 +21,12 @@ $totalPrice = sanVal($totalPrice);
 $transferCode = $_POST['transfer-code'];
 $transferCode = sanVal($transferCode);
 
-// Double check that the room is available
-if (!isRoomAvailable($roomId, $arrival, $departure)) {
-    echo '<pre>';
-    die(var_dump('the room is not available for the selected dates'));
-    // If the room is not available, redirect the user to index.php with a message saying that the room is not available
-    // !!! BREAK
-}
 
-function isRoomAvailable($roomId, $arrival, $departure)
+
+function isRoomAvailable(string $roomId, string $arrival, string $departure): bool
 {
     // Check if there are any bookings for the selected room and dates
-    $db = connect('hotel.db');
+    $db = connect('../hotel.db');
     $sql = 'SELECT * FROM bookings WHERE room_id = :roomId AND (arrival >= :arrival AND departure <= :departure);';
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':arrival', $arrival, PDO::PARAM_STR);
@@ -46,60 +40,60 @@ function isRoomAvailable($roomId, $arrival, $departure)
     return true;
 }
 
+// Double check that the room is available
+if (!isRoomAvailable($roomId, $arrival, $departure)) {
+    // If the room is not available, redirect the user error.php with a message saying that the room is not available
+    $_SESSION['user-error'] = 'The room is not available for the selected dates.';
+    header('Location: error.php');
+    exit;
+}
 
-// Check if the transfer code is valid uuid
-if (!isValidUuid($transferCode)) {
-    echo 'not valid';
-    // If the transfer code is invalid, redirect the user to index.php with a message saying that the transfer code is invalid
-    // !!! BREAK
-    die();
+// Check with bank if the user's transfer code is valid, relative to the total price
+function checkTransferCodeWithBank(string $transferCode, string $totalPrice): void
+{
+    // Check transfer code further by posting{'transferCode': $transferCode} to the Central bank API
+    // https://www.yrgopelag.se/centralbank/transferCode
+    $client = new \GuzzleHttp\Client();
+    try {
+        $response = $client->request('POST', 'https://www.yrgopelag.se/centralbank/transferCode', [
+            'form_params' => [
+                'transferCode' => $transferCode,
+                'totalcost' => $totalPrice
+            ],
+        ]);
+        $responseData = json_decode($response->getBody()->getContents(), true);
+        if (isset($responseData['error'])) {
+            // Redirect user to error.php with a message saying that the transfer code is invalid
+            $_SESSION['user-error'] = 'The transfer code was not accepted by the Yrgopelag Central Bank.';
+            header('Location: error.php');
+            exit;
+        }
+
+        if (isset($responseData['transferCode'])) {
+            // Trasfer code is valid, create a reservation in database
+            return;
+        }
+    } catch (GuzzleHttp\Exception\ServerException $e) {
+        $response = $e->getResponse();
+        $responseBodyAsString = $response->getBody()->getContents();
+        // Redirect user to error.php with an error message
+        $_SESSION['user-error'] = 'We are currently unable to establish a connection to the Yrgopelag Central Bank.';
+        header('Location: error.php');
+        exit;
+    }
 }
 
 if (isValidUuid($transferCode)) {
     checkTransferCodeWithBank($transferCode, $totalPrice);
-}
-
-// Check if the user's transfer code is valid by using the function isValidUuid($transferCode)
-function checkTransferCodeWithBank($transferCode, $totalPrice)
-{
-
-    if (isValidUuid($transferCode, $totalPrice)) {
-        // If the transfer code is valid, check it further by posting{'transferCode': $transferCode} to
-        // https://www.yrgopelag.se/centralbank/transferCode
-
-        $client = new \GuzzleHttp\Client();
-        try {
-            $response = $client->request('POST', 'https://www.yrgopelag.se/centralbank/transferCode', [
-                'form_params' => [
-                    'transferCode' => $transferCode,
-                    'totalcost' => $totalPrice
-                ],
-            ]);
-            $responseData = json_decode($response->getBody()->getContents(), true);
-            if (isset($responseData['error'])) {
-                // TODO: Redirect user to index.php with a message saying that the transfer code is invalid
-                // TODO: BREAK
-                echo '<pre>';
-                die(var_dump($responseData['error']));
-            }
-
-            if (isset($responseData['transferCode'])) {
-                // Trasfer code is valid, create a reservation in database
-
-            }
-        } catch (GuzzleHttp\Exception\ServerException $e) {
-            $response = $e->getResponse();
-            $responseBodyAsString = $response->getBody()->getContents();
-            // TODO: Redirect user to index.php with a message saying that the transfer code is invalid
-            // TODO: BREAK
-            echo '<pre>';
-            die(var_dump($responseBodyAsString));
-        }
-    }
+} else {
+    // If the transfer code is invalid, redirect the user to error.php with a message saying that the transfer code is invalid
+    $_SESSION['user-error'] = 'The transfer code is invalid.';
+    header('Location: error.php');
+    exit;
 }
 
 // If all checks are ok, create a reservation in database
-$db = connect('hotel.db');
+$db = connect('../hotel.db');
 $sql = 'INSERT INTO bookings (room_id, guest_firstname, guest_lastname, arrival, departure, price, transfer_code) VALUES (:roomId, :firstName, :lastName, :arrival, :departure, :totalPrice, :transferCode);';
 $stmt = $db->prepare($sql);
 $stmt->bindParam(':roomId', $roomId, PDO::PARAM_INT);
@@ -143,7 +137,7 @@ if (count($featureIds) > 0) {
 // // Get the room name (comfort level) of the selected room
 // function getComfortLevel($roomId)
 // {
-//     $db = connect('hotel.db');
+//     $db = connect('../hotel.db');
 //     $sql = 'SELECT comfort_level FROM rooms WHERE id = :roomId;';
 //     $stmt = $db->prepare($sql);
 //     $stmt->bindParam(':roomId', $roomId, PDO::PARAM_INT);
@@ -176,7 +170,7 @@ $_SESSION['bookingDetails'] = $bookingDetails;
 $bookingDetails = json_encode($bookingDetails);
 
 // Save string to file success-<booking id>.json
-file_put_contents('success/success-' . $bookingId . '.json', $bookingDetails);
+file_put_contents('../success/success-' . $bookingId . '.json', $bookingDetails);
 
 
 // Deposit transfer code at the bank using Guzzle
@@ -191,9 +185,9 @@ try {
     ]);
     $responseData = json_decode($response->getBody()->getContents(), true);
     if (isset($responseData[0]) && str_contains($responseData[0], 'wrong')) {
-        echo '<pre>';
-        echo 'post error: ';
-        var_dump($responseData);
+        // Redirect user to success.php, even if deposit failed
+        header('Location: success.php');
+        exit;
     } else {
         // Redirect user to success.php
         header('Location: success.php');
@@ -202,9 +196,7 @@ try {
 } catch (GuzzleHttp\Exception\ServerException $e) {
     $response = $e->getResponse();
     $responseBodyAsString = $response->getBody()->getContents();
-    echo '<pre>';
-    echo 'post error catched: ';
-    var_dump($responseBodyAsString);
+    // Redirect user to success.php, even if connection to bank failed
+    header('Location: success.php');
+    exit;
 }
-
-exit;

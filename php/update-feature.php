@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once(__DIR__ . '/autoload.php');
+require_once(__DIR__ . '/../autoload.php');
 
 // Get posted data
 $featureId = $_POST['update-feature-id'];
@@ -15,7 +15,7 @@ $featurePrice = $_POST['update-feature-price'];
 $featurePrice = sanVal($featurePrice);
 
 // Update feature in database
-$db = connect('hotel.db');
+$db = connect('../hotel.db');
 $sql = 'UPDATE features SET feature = :featureName, description = :featureDescription, price = :featurePrice WHERE id = :featureId;';
 $stmt = $db->prepare($sql);
 $stmt->bindParam(':featureName', $featureName, PDO::PARAM_STR);
