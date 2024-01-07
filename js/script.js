@@ -11,10 +11,10 @@ function onLoad() {
   // When page loads, get value of selectedRoomId (resides in index.php)
   // If selectedRoomId is null or undefined, set value to 1
   if (selectedRoomId !== 1 && selectedRoomId !== 2 && selectedRoomId !== 3) {
-    console.log('selectedRoomId is null or undefined, will give it value 1');
+    //console.log('selectedRoomId is null or undefined, will give it value 1');
     selectedRoomId = 1;
   }
-  console.log('selectedRoomId is ' + selectedRoomId);
+  //console.log('selectedRoomId is ' + selectedRoomId);
   // According to selectedRoomId, set class "selected" on corresponding room, both input[submit] and .room-info div
   const selectedTag = document.querySelector(
     '#choose-comfort-form input:nth-of-type(' + selectedRoomId + ')'
