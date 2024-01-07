@@ -1,39 +1,25 @@
-//How wide is one slide?
-const slideWidth =
-  document.querySelector('.feature-slider').scrollWidth /
-  document.querySelectorAll('.feature').length;
+// Slide width is the width of .feature element
+let slideWidth = document.querySelector('.feature').offsetWidth;
 
-//How wide is the visible part of the slider? Depends on screen size
-let sliderWidth = slideWidth * 3;
-function checkScreen(x) {
-  if (x.matches) {
-    // If media query matches
-    sliderWidth = slideWidth;
-  } else {
-    sliderWidth = slideWidth * 3;
-  }
-}
+// Slider width is identical to .room-info element width
+let sliderWidth = document.querySelector('.room-info').offsetWidth;
 
-// Create a MediaQueryList object
-var x = window.matchMedia('(max-width: 1200px)');
-
-// Call listener function at run time
-checkScreen(x);
-
-// Attach listener function on state changes
-x.addEventListener('change', function () {
-  checkScreen(x);
-});
-
+// Arrow buttons for slider
 const rightBtn = document.querySelector('.slider-btn.right');
 const leftBtn = document.querySelector('.slider-btn.left');
 
 leftBtn.addEventListener('click', () => {
+  // Get the current width of the slide
+  slideWidth = document.querySelector('.feature').offsetWidth;
+
   document.querySelector('.feature-slider').scrollLeft -= slideWidth;
   updateBtns();
 });
 
 rightBtn.addEventListener('click', () => {
+  // Get the current width of the slide
+  slideWidth = document.querySelector('.feature').offsetWidth;
+
   document.querySelector('.feature-slider').scrollLeft += slideWidth;
   updateBtns();
 });
@@ -41,12 +27,14 @@ rightBtn.addEventListener('click', () => {
 // Listen for scroll events on .feature-slider
 const slider = document.querySelector('.feature-slider');
 slider.addEventListener('scroll', () => {
-  console.log('scrolling');
   updateBtns();
 });
 
 function updateBtns() {
-  //If not scrolled all the way to the right, show right button
+  // Get the current width of the slider
+  sliderWidth = document.querySelector('.room-info').offsetWidth;
+
+  // If not scrolled all the way to the right, show right button
   if (
     document.querySelector('.feature-slider').scrollLeft <
     document.querySelector('.feature-slider').scrollWidth - sliderWidth
@@ -55,7 +43,7 @@ function updateBtns() {
   }
 
   //If scrolled all the way to the left, hide left button
-  if (document.querySelector('.feature-slider').scrollLeft <= 0) {
+  if (document.querySelector('.feature-slider').scrollLeft === 0) {
     leftBtn.style.display = 'none';
   } else {
     leftBtn.style.display = 'block';
@@ -69,7 +57,7 @@ function updateBtns() {
 
   //If scrolled all the way to the right, hide right button
   if (
-    document.querySelector('.feature-slider').scrollLeft >
+    document.querySelector('.feature-slider').scrollLeft ===
     document.querySelector('.feature-slider').scrollWidth - sliderWidth
   ) {
     rightBtn.style.display = 'none';
