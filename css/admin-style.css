@@ -75,6 +75,28 @@ label {
   margin-top: 1rem;
 }
 
+.admin-reservations {
+  width: 100%;
+}
+
+.admin-reservations table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.admin-reservations table td,
+.admin-reservations table th {
+  border: 1px solid var(--white);
+  padding: 8px;
+}
+
+.admin-reservations table th {
+  text-align: left;
+  font-weight: bold;
+  background-color: var(--blue-lightgray);
+}
+
 @media (min-width: 400px) {
   .update-message,
   .admin-rooms,
@@ -85,5 +107,11 @@ label {
   .update-message-container {
     width: 100%;
     padding: 24px 64px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .admin-reservations table {
+    width: 50%;
   }
 }

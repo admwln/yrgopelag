@@ -5,6 +5,7 @@ declare(strict_types=1);
 require_once(__DIR__ . '/../autoload.php');
 require_once(__DIR__ . '/get-rooms.php');
 require_once(__DIR__ . '/get-features.php');
+require_once(__DIR__ . '/get-reservations.php');
 
 // Check if user is logged in
 if (!isset($_SESSION['loggedIn'])) {
@@ -130,6 +131,28 @@ else if (isset($_POST['select-feature']) && $_POST['select-feature'] != 'x') {
                 <label for="update-feature-price">Price</label>
                 <input type="text" name="update-feature-price" id="update-feature-price" value="<?= $features[$featureToUpdate]['price']; ?>" placeholder="Price" required>
                 <input type="submit" value="Update">
+            </form>
+        </section>
+
+        <section class="admin-reservations">
+
+            <h2>Reservations</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Room</th>
+                        <th>Guest</th>
+                        <th>Arrival</th>
+                        <th>Departure</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?= $reservationsHtml; ?>
+                </tbody>
+            </table>
+            <form action="purge-reservations.php" method="post">
+                <input id="purge-btn" type="submit" value="Purge all">
             </form>
         </section>
 
