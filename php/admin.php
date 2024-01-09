@@ -138,4 +138,5 @@ require __DIR__ . '/header.php';
     </form>
 
 </main>
+<script src="../js/admin.js"></script>
 <?php require __DIR__ . '/footer.php'; ?>
