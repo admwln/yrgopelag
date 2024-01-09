@@ -59,7 +59,6 @@ function processDate(date) {
     }
   }
 
-  // !!! TODO: Move out-of-range logic to a separate function
   // Starting at selectedDateIndexOfAll +1, loop through all higher dates and check if date has class "booked"
   let bookedFrom;
 
@@ -92,11 +91,9 @@ function processDate(date) {
       allDates[l].classList.remove(OUT_OF_RANGE_CLASS);
     }
   }
-  // !!! End of "move out-of-range logic to a separate function"
 
   // If any date is selected...
   if (document.querySelectorAll('.calendar-dates .selected').length > 0) {
-    // TODO: Move logic to a separate function
     // If two dates are checked, check all dates in between
     for (let l = 0; l < selectableCalendarDates.length; l++) {
       // If date with index l is checked, get index store index of previous date and break loop
@@ -137,7 +134,6 @@ function processDate(date) {
     }
 
     // Day count and price calculation
-    // TODO: Move logic to a separate function
     // Loop through all .calandar-dates li elements with class "selected" and get data value of the first and last element
     const selectedDates = document.querySelectorAll(
       '.calendar-dates li.selected'

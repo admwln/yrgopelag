@@ -9,7 +9,6 @@
 </footer>
 <script src="<?= $ROOT; ?>js/script.js"></script>
 <script src="<?= $ROOT; ?>js/slider.js"></script>
-<script src="<?= $ROOT; ?>js/admin.js"></script>
 </body>
 
 </html>
