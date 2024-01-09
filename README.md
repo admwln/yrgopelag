@@ -6,6 +6,10 @@ Vertigo is a mesmerizing island. As you approach from the azure waters, the isla
 
 Welcome to Overview Hotel. Perched high above the ground, our unique retreat invites you to experience a stay like no other, where each room is meticulously designed to offer unrivaled panoramic views that will leave you spellbound. We take pride in our elevated accommodations that promise an escape into the skies. Three distinct rooms, each offering a different vantage point, allow you to immerse yourself in the mesmerizing beauty of Vertigo.
 
+## Project info
+
+This project is an assignment for first-year web development students at Yrgo, Gothenburg, Sweden.
+
 ## Requirements
 
 -   PHP 8.2 or higher
