@@ -29,12 +29,6 @@ main input[type='submit'] {
   width: fit-content;
 }
 
-footer input[type='submit'] {
-  background-color: var(--dark-blue);
-  color: var(--links);
-  cursor: pointer;
-}
-
 .admin-rooms,
 .admin-features {
   width: 100%;
