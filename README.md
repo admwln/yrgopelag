@@ -19,7 +19,7 @@ This project is an assignment for first-year web development students at Yrgo, G
 
 1. Clone the repository: `git clone https://github.com/admwln/yrgopelag.git`
 2. Install dependencies
-3. Configure settings in `.env` file. See `.env.example`. Get API-key from Yrgopelag Central Bank: https://yrgopelag.se/centralbank/
+3. Configure settings in `.env` file. See `.env.example`. Your username is your first name, with the initial letter capitalized. Get an API-key from the Yrgopelag Central Bank: https://yrgopelag.se/centralbank/
 
 ### Install dependencies
 
