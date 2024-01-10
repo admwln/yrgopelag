@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 require_once(__DIR__ . '/../autoload.php');
 ?>
 
@@ -14,7 +12,7 @@ require __DIR__ . '/header.php';
     <h2>Something Went Wrong</h2>
     <?php
     if (isset($_SESSION['user-error'])) { ?>
-        <p><?= $_SESSION['user-error']; ?></p>
+        <p class="error-message"><?= $_SESSION['user-error']; ?></p>
     <?php
         unset($_SESSION['user-error']);
     }

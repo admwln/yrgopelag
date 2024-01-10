@@ -72,7 +72,7 @@ function checkTransferCodeWithBank(string $transferCode, string $totalPrice): vo
         $responseData = json_decode($response->getBody()->getContents(), true);
         if (isset($responseData['error'])) {
             // Redirect user to error.php with a message saying that the transfer code is invalid
-            $_SESSION['user-error'] = 'The transfer code was not accepted by the Yrgopelag Central Bank.';
+            $_SESSION['user-error'] = 'The transfer code was not accepted by the Yrgopelag Central Bank. Make sure that the transfer code is for the correct amount.';
             header('Location: error.php');
             exit;
         }
