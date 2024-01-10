@@ -23,7 +23,7 @@ This project is an assignment for first-year web development students at Yrgo, G
 
 ### Install dependencies
 
-Install Composer
+#### Install Composer
 
 ```
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -32,24 +32,24 @@ php composer-setup.php
 php -r "unlink('composer-setup.php');"
 ```
 
-Install Guzzle
+#### Install Guzzle
 
 ```
 composer require guzzlehttp/guzzle
 ```
 
-Install vlucas/phpdotenv
+#### Install vlucas/phpdotenv
 
 ```
 composer require vlucas/phpdotenv
 ```
 
-Install sqlite3
+#### Install sqlite3
 
 Please refer to the following instructions:
 https://www.quackit.com/sqlite/tutorial/sqlite_installation.cfm
 
-Install pdo_sqlite
+#### Install pdo_sqlite
 
 Pdo_sqlite should be enabled by default:
 https://www.php.net/manual/en/ref.pdo-sqlite.php
