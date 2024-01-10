@@ -20,7 +20,7 @@ require __DIR__ . '/php/header.php';
 <script>
     let selectedRoomId = <?= $selectedRoomId; ?>;
 </script>
-
+<input id="get-price-btn" type="button" value="Get price" style="cursor:pointer">
 <main>
     <div class="choose-comfort">
         <form id="choose-comfort-form" action="php/get-calendar.php" method="post">
@@ -99,10 +99,10 @@ require __DIR__ . '/php/header.php';
             <h2>Place Your Reservation</h2>
             <div class="reservation-flex-container">
                 <div class="reservation-flex-item price">
-                    <label for="room-price">Room subtotal</label>
+                    <!-- <label for="room-price">Room subtotal</label>
                     <input type="text" name="room-price" id="room-price" value="0" readonly><span class="usd">USD</span>
                     <label for="features-price">Extras subtotal</label>
-                    <input type="text" name="features-price" id="features-price" value="0" readonly><span class="usd">USD</span>
+                    <input type="text" name="features-price" id="features-price" value="0" readonly><span class="usd">USD</span> -->
                     <label for="total-price">Total price</label>
                     <input type="text" name="total-price" id="total-price" value="0" readonly><span class="usd">USD</span>
                 </div>
