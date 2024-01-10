@@ -37,7 +37,7 @@ require __DIR__ . '/header.php';
 
     <form action="verify.php" method="post">
         <div>
-            <input type="text" name="username" id="username" placeholder="Username" required>
+            <input type="text" name="username" id="username" placeholder="Username" autocomplete="given-name" required>
         </div>
         <div>
             <input type="password" name="password" id="password" placeholder="Password" required>
