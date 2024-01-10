@@ -47,36 +47,8 @@ if (!isRoomAvailable($roomId, $arrival, $departure, $featureIds)) {
     header('Location: error.php');
     exit;
 }
+
 // Double check that the posted total price is correct
-function getTotalPrice(string $roomId, string $arrival, string $departure, array $featureIds): int
-{
-    // Get the number of days between arrival and departure, including arrival and departure
-    $in = new DateTime($arrival);
-    $out = new DateTime($departure);
-    $interval = $in->diff($out);
-    $days = $interval->format('%a');
-    $days += 1;
-
-    $db = connect('../hotel.db');
-    $sql = 'SELECT price FROM rooms WHERE id = :roomId;';
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(':roomId', $roomId, PDO::PARAM_INT);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    $totalPrice = $result['price'];
-    $totalPrice *= $days;
-
-    foreach ($featureIds as $featureId) {
-        $sql = 'SELECT price FROM features WHERE id = :featureId;';
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':featureId', $featureId, PDO::PARAM_INT);
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        $totalPrice += $result['price'];
-    }
-    return $totalPrice;
-}
-
 if ($totalPrice != getTotalPrice($roomId, $arrival, $departure, $featureIds)) {
     // If the total price is incorrect, redirect the user to error.php with a message saying that the total price is incorrect
     $_SESSION['user-error'] = 'The total price is incorrect.';
