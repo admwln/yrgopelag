@@ -45,10 +45,12 @@ composer require vlucas/phpdotenv
 ```
 
 Install sqlite3
+
 Please refer to the following instructions:
 https://www.quackit.com/sqlite/tutorial/sqlite_installation.cfm
 
 Install pdo_sqlite
+
 Pdo_sqlite should be enabled by default:
 https://www.php.net/manual/en/ref.pdo-sqlite.php
 
