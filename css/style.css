@@ -656,4 +656,8 @@ main {
   .slider-btn.right {
     right: -1.5rem;
   }
+
+  p.error-message {
+    width: 33%;
+  }
 }
