@@ -13,7 +13,7 @@ This project is an assignment for first-year web development students at Yrgo, G
 ## Requirements
 
 -   PHP 8.2 or higher
--   Dependencies: Composer, Guzzle, vlucas/phpdotenv
+-   Dependencies: Composer, Guzzle, vlucas/phpdotenv, sqlite3, pdo_sqlite
 
 ## Installation
 
@@ -44,9 +44,17 @@ Install vlucas/phpdotenv
 composer require vlucas/phpdotenv
 ```
 
-## Database structure
+Install sqlite3
+Please refer to the following instructions:
+https://www.quackit.com/sqlite/tutorial/sqlite_installation.cfm
 
-The sqlite database `hotel.db` consists of four tables.
+Install pdo_sqlite
+Pdo_sqlite should be enabled by default:
+https://www.php.net/manual/en/ref.pdo-sqlite.php
+
+## Database
+
+The sqlite database `hotel.db` is included in the root directory of this project. It consists of four tables: rooms, features, bookings, and booking_feature. Included below are the `create table` statements used.
 
 ```
 CREATE TABLE rooms (
