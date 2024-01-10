@@ -33,7 +33,7 @@ require __DIR__ . '/header.php';
     ?>
 </section>
 
-<main>
+<main class="success">
 
     <h2>Login</h2>
 
