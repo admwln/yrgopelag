@@ -3,8 +3,6 @@ const AVAILABLE_CLASS = 'available';
 const OUT_OF_RANGE_CLASS = 'out-of-range';
 const BOOKED_CLASS = 'booked';
 
-let dayCount = 0;
-
 // Determine which room is selected
 selectedRoomId = parseInt(selectedRoomId);
 
@@ -95,9 +93,6 @@ function processDate(date) {
     for (let l = 0; l < allDates.length; l++) {
       allDates[l].classList.remove(OUT_OF_RANGE_CLASS);
     }
-    // const roomPriceInput = document.querySelector('#room-price');
-    // roomPriceInput.value = 0;
-    //calculateTotalPrice();
   }
 
   // If any date is selected...
@@ -141,25 +136,10 @@ function processDate(date) {
       }
     }
 
-    //   // Day count and price calculation
-    //   // Loop through all .calandar-dates li elements with class "selected" and get data value of the first and last element
+    // Loop through all .calandar-dates li elements with class "selected" and get data value of the first and last element
     const selectedDates = document.querySelectorAll(
       '.calendar-dates li.selected'
     );
-
-    //   // Calculate dayCount
-    //   dayCount =
-    //     selectedDates[selectedDates.length - 1].getAttribute('data') -
-    //     selectedDates[0].getAttribute('data') +
-    //     1;
-
-    //   // Calculate total price
-    //   const roomSubTotal = dayCount * pricePerDay;
-
-    //   // Pass total room price to #room-price
-    //   const price = document.querySelector('#room-price');
-    //   price.value = roomSubTotal;
-    //   calculateTotalPrice();
 
     // Turn into date format
     firstSelectedDate = selectedDates[0].getAttribute('data');
@@ -174,72 +154,36 @@ function processDate(date) {
       ? (lastSelectedDate = '0' + lastSelectedDate)
       : lastSelectedDate;
     lastSelectedDate = '2024-01-' + lastSelectedDate;
-
-    //}
   }
-  // If no date is selected
+  // If no date is selected, unset value of input fields #arrival and #departure
   if (document.querySelectorAll('.calendar-dates .selected').length <= 0) {
     firstSelectedDate = '';
     lastSelectedDate = '';
-    // // Set value of input fields #arrival and #departure
-    // document.querySelector('#arrival').value = '';
-    // document.querySelector('#departure').value = '';
   }
   // Set value of input fields #arrival and #departure
   document.querySelector('#arrival').value = firstSelectedDate;
   document.querySelector('#departure').value = lastSelectedDate;
-}
 
-// PRICE PER DAY
-// const pricePerDay = parseInt(
-//   document.querySelector('.room-info.selected .room-price').innerText
-// );
+  getPrice();
+}
 
 // FEATURES checkboxes
 const checkboxes = document.querySelectorAll('.feature input[type="checkbox"]');
 checkboxes.forEach((checkbox) => {
   checkbox.addEventListener('change', () => {
-    // Get price from .feature-price in sibling to parent element
-    // const featurePrice = parseInt(
-    //   checkbox.parentElement.previousElementSibling.querySelector(
-    //     '.feature-price'
-    //   ).innerText
-    // );
     if (checkbox.checked) {
       // If checkbox is checked, add class "selected" to parent .feature
       checkbox.parentElement.parentElement.parentElement.classList.add(
         SELECTED_CLASS
       );
-
-      // Pass price to #features-price
-      //   const featuresPriceInput = document.querySelector('#features-price');
-      //   let featuresPrice = featuresPriceInput.value;
-      //   featuresPriceInput.value =
-      //     parseInt(featuresPrice) + parseInt(featurePrice);
-      //   calculateTotalPrice();
-      // } else {
+    } else {
       checkbox.parentElement.parentElement.parentElement.classList.remove(
         SELECTED_CLASS
       );
-      // Deduct price from #features-price
-      //   const featuresPriceInput = document.querySelector('#features-price');
-      //   let featuresPrice = featuresPriceInput.value;
-      //   featuresPriceInput.value =
-      //     parseInt(featuresPrice) - parseInt(featurePrice);
-      //   calculateTotalPrice();
     }
+    getPrice();
   });
 });
-
-// Calculate total price
-// function calculateTotalPrice() {
-//   const totalPriceInput = document.querySelector('#total-price');
-//   const roomPriceInput = document.querySelector('#room-price');
-//   const featuresPriceInput = document.querySelector('#features-price');
-//   const totalPrice =
-//     parseInt(roomPriceInput.value) + parseInt(featuresPriceInput.value);
-//   totalPriceInput.value = totalPrice;
-// }
 
 // Enable Room type dropdown on submit
 const roomDropdown = document.querySelector('#room-type');
@@ -257,13 +201,8 @@ document
     this.submit();
   });
 
-const getPriceBtn = document.querySelector('#get-price-btn');
-getPriceBtn.addEventListener('click', () => {
-  getPrice();
-});
-
 function getPrice() {
-  // What do we need to send to get-price.php? 1) room type (comfort level), 2) arrival date, 3) departure date, 4) selected features, if any
+  // Post to get-price.php: 1) room type (comfort level), 2) arrival date, 3) departure date, 4) selected features, if any
   // 1) room type
   const roomType = document.querySelector('#room-type').value;
   // 2) arrival date
@@ -299,9 +238,9 @@ function getPrice() {
   // When response is received, console log response
   xhr.onload = function () {
     if (this.status == 200) {
-      console.log(this.responseText);
-      // const response = JSON.parse(this.responseText);
-      // console.log(response);
+      const totalPrice = this.responseText;
+      const totalPriceInput = document.querySelector('#total-price');
+      totalPriceInput.value = totalPrice;
     }
   };
 }

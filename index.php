@@ -20,7 +20,6 @@ require __DIR__ . '/php/header.php';
 <script>
     let selectedRoomId = <?= $selectedRoomId; ?>;
 </script>
-<input id="get-price-btn" type="button" value="Get price" style="cursor:pointer">
 <main>
     <div class="choose-comfort">
         <form id="choose-comfort-form" action="php/get-calendar.php" method="post">
@@ -44,7 +43,7 @@ require __DIR__ . '/php/header.php';
             } ?>
         </section>
         <section id="calendar" class="calendar">
-            <h2>January 2024</h2>
+            <h2><i class="fa-regular fa-calendar"></i> January 2024</h2>
 
             <div class="arrival-departure">
                 <div class="date-container">
@@ -82,7 +81,7 @@ require __DIR__ . '/php/header.php';
 
 
         <section class="features-container" id="features-container">
-            <h2>Extra Features</h2>
+            <h2><i class="fa-solid fa-wand-magic-sparkles"></i> Extra Features</h2>
             <div class="feature-slider">
                 <div class="features">
                     <?= $featuresHtml; ?>
@@ -96,13 +95,9 @@ require __DIR__ . '/php/header.php';
             </button>
         </section>
         <section class="reservation">
-            <h2>Place Your Reservation</h2>
+            <h2><i class="fa-solid fa-house-circle-check"></i> Place Your Reservation</h2>
             <div class="reservation-flex-container">
                 <div class="reservation-flex-item price">
-                    <!-- <label for="room-price">Room subtotal</label>
-                    <input type="text" name="room-price" id="room-price" value="0" readonly><span class="usd">USD</span>
-                    <label for="features-price">Extras subtotal</label>
-                    <input type="text" name="features-price" id="features-price" value="0" readonly><span class="usd">USD</span> -->
                     <label for="total-price">Total price</label>
                     <input type="text" name="total-price" id="total-price" value="0" readonly><span class="usd">USD</span>
                 </div>

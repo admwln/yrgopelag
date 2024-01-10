@@ -48,6 +48,7 @@ if (!isRoomAvailable($roomId, $arrival, $departure, $featureIds)) {
     exit;
 }
 
+// Double check that the posted total price is correct
 if ($totalPrice != getTotalPrice($roomId, $arrival, $departure, $featureIds)) {
     // If the total price is incorrect, redirect the user to error.php with a message saying that the total price is incorrect
     $_SESSION['user-error'] = 'The total price is incorrect.';
