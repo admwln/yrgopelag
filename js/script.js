@@ -4,6 +4,8 @@ const OUT_OF_RANGE_CLASS = 'out-of-range';
 const BOOKED_CLASS = 'booked';
 
 let dayCount = 0;
+
+// Determine which room is selected
 selectedRoomId = parseInt(selectedRoomId);
 
 function onLoad() {
@@ -90,6 +92,9 @@ function processDate(date) {
     for (let l = 0; l < allDates.length; l++) {
       allDates[l].classList.remove(OUT_OF_RANGE_CLASS);
     }
+    const roomPriceInput = document.querySelector('#room-price');
+    roomPriceInput.value = 0;
+    calculateTotalPrice();
   }
 
   // If any date is selected...

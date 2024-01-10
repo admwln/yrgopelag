@@ -205,6 +205,11 @@ $_SESSION['bookingDetails'] = $bookingDetails;
 // Turn it into a JSON string
 $bookingDetails = json_encode($bookingDetails);
 
+// If the directory does not exist, create it
+if (!file_exists('../success')) {
+    mkdir('../success', 0777, true);
+}
+
 // Save string to file success-<booking id>.json
 file_put_contents('../success/success-' . $bookingId . '.json', $bookingDetails);
 

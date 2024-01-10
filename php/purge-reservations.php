@@ -13,8 +13,8 @@ $sql = 'DELETE FROM booking_feature;';
 $statement = $db->prepare($sql);
 $statement->execute();
 
-// Delete all files in success folder
-$files = glob('../success/*');
+// Delete all files in success folder, that start with 'success-'
+$files = glob('../success/success-*');
 foreach ($files as $file) {
     if (is_file($file)) {
         unlink($file);

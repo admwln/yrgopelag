@@ -7,8 +7,6 @@
     <div><i class="fa-solid fa-envelope"></i> <a href="mailto:info@example.com">info@overviewhotel.com</a></div>
 
 </footer>
-<script src="<?= $ROOT; ?>js/script.js"></script>
-<script src="<?= $ROOT; ?>js/slider.js"></script>
 </body>
 
 </html>

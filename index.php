@@ -120,4 +120,6 @@ require __DIR__ . '/php/header.php';
 
     </form>
 </main>
+<script src="./js/script.js"></script>
+<script src="./js/slider.js"></script>
 <?php require __DIR__ . '/php/footer.php'; ?>
