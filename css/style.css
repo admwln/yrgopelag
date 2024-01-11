@@ -180,11 +180,6 @@ main {
   font-size: 1.175rem;
 }
 /* Calendar */
-p.calendar-hint {
-  background-color: var(--blue-lightgray);
-  padding: 0.5rem;
-  border-radius: 5px;
-}
 
 .date-container select,
 .date-container select:disabled,
