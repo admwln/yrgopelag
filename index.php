@@ -44,7 +44,7 @@ require __DIR__ . '/php/header.php';
         </section>
         <section id="calendar" class="calendar">
             <h2><i class="fa-regular fa-calendar"></i> January 2024</h2>
-
+            <p class="calendar-hint"><i class="fa-solid fa-circle-exclamation"></i> Please use the calendar to select the duration of your stay.</p>
             <div class="arrival-departure">
                 <div class="date-container">
                     <label for="room-type">Room</label>
@@ -63,7 +63,7 @@ require __DIR__ . '/php/header.php';
                 </div>
                 <div class="date-container">
                     <label for="departure">Departure</label>
-                    <input type="text" name="departure" id="departure" min="2024-01-01" max="2024-01-31" readlonly required>
+                    <input type="text" name="departure" id="departure" min="2024-01-01" max="2024-01-31" readonly required>
                 </div>
             </div>
 
