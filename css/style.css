@@ -294,6 +294,11 @@ p.calendar-hint {
   background-color: var(--cherry);
 }
 
+#reserve-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .personal input[type='text'] {
   background: var(--white);
   color: #000;

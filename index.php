@@ -108,7 +108,7 @@ require __DIR__ . '/php/header.php';
                     <input type="text" name="last-name" id="last-name" autocomplete="family-name" required>
                     <label for="transfer-code">Transfer code</label>
                     <input type="text" name="transfer-code" id="transfer-code" required>
-                    <button id="reserve-btn" type="submit" form="booking-form">Reserve</button>
+                    <button id="reserve-btn" type="submit" form="booking-form" disabled>Reserve</button>
                 </div>
             </div>
         </section>

@@ -89,14 +89,21 @@ function processDate(date) {
   }
 
   // If no date is selected, remove class "out-of-range" from all dates
+  // Disable #reserve-btn
   if (document.querySelectorAll('.calendar-dates .selected').length <= 0) {
+    const reserveBtn = document.querySelector('#reserve-btn');
+    reserveBtn.disabled = true;
+
     for (let l = 0; l < allDates.length; l++) {
       allDates[l].classList.remove(OUT_OF_RANGE_CLASS);
     }
   }
 
   // If any date is selected...
+  // Enable #reserve-btn
   if (document.querySelectorAll('.calendar-dates .selected').length > 0) {
+    const reserveBtn = document.querySelector('#reserve-btn');
+    reserveBtn.disabled = false;
     // If two dates are checked, check all dates in between
     for (let l = 0; l < selectableCalendarDates.length; l++) {
       // If date with index l is checked, get index store index of previous date and break loop
