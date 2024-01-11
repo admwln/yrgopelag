@@ -4,6 +4,8 @@ require_once(__DIR__ . '/../autoload.php');
 
 // Unset roomId session variable
 unset($_SESSION['roomId']);
+// Unset calendar session variable
+unset($_SESSION['calendar']);
 
 // Check if user is logged in
 if (isset($_SESSION['loggedIn'])) {

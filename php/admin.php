@@ -12,6 +12,11 @@ if (!isset($_SESSION['loggedIn'])) {
     header('Location: login.php');
 }
 
+// Unset roomId session variable
+unset($_SESSION['roomId']);
+// Unset calendar session variable
+unset($_SESSION['calendar']);
+
 // Check if room id is set in session variable
 if (isset($_SESSION['updated-room-id'])) {
     $roomToUpdate = intval($_SESSION['updated-room-id']) - 1;
