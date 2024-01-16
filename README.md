@@ -98,13 +98,13 @@ CREATE TABLE booking_feature (
 
 # Code review
 
-1. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-2. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-3. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-4. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-5. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-6. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-7. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-8. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-9. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-10. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
+1. Firstly, I want to compliment the styling of your webpage, it is very appealing, and you can tell that time and effort went into it!
+2. On the same note it is very smart to separate the CSS files to keep the styling organized and easy to look over/change.
+3.The comments in your PHP code result in structured code that is easy to read.
+4. Your project contains a lot of PHP files, which on one hand is positive since you can tell that there is a lot of thought and coherence in your code. Although I think that some of these files could be combined so it is easier for an “outsider” to understand how your code operates. For example, the files: “get-calendar.php”, “get-features.php”, “get-price.php”, “get-reservations.php” and “get-rooms.php” are examples of files that all require “autoload.php”, and the ladder four all contain between 15-30 lines of code each. Since these files all require the same “autoload.php” file and have similar function or a similar “theme” of functions (if that make sense) the shorter ones could be combined. 
+5. In the “get-reservations.php” file on lines 25 – 38 I really liked your solution for checking if a room is reserved using if (count($reservations) === 0){…}. I thought it was a clean way to check if any room is booked (I use the same solution so I’m a bit subjective here).
+6. In “make-reservations.php” lines 199 – 215 you choose to redirect the user to “success.php” even if the deposit or the connection to the bank doesn’t work. I wonder why this is. I could assume it is because it is not a problem that the “customer” directly interferes with, but there is also no error message for you as admin to inform you that the connection isn’t working. .
+7. I am intrigued by your usage of sessions. I can admit that I am not as familiar with using sessions as you seem to be so I would love if you would explain it to me😊 If this just seems like extra work for you, you of course don’t have to I am just interested as to what advantages there are with using sessions this way. 
+8. In “make-reservations.php” through lines 8-22 you use the “sanVal” function which you created in lines 45-52 in “hotelFunctions.php”. This is a great way to make sure that all data from “customers” is sanitated and protects your code!
+9. The booking calendar has a graphical presentation of what rooms are booked and not. I think that it would be nice if a user could book a room by also typing in dates, not only selecting from the calendar. This is just a suggestion that would further elevate the design of your website.
+10. In conclusion your project is well executed and some of the things I take with me for my upcoming projects is your styling and usage of sessions. Well done Adam!
